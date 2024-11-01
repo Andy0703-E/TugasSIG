@@ -98,72 +98,63 @@
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const map = L.map('map').setView([-6.115228, 120.462124], 16);
+document.addEventListener("DOMContentLoaded", function() {
+  const map = L.map('map').setView([-6.115228, 120.462124], 16);
 
-    const osmLayer = L.tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }
-    );
-    osmLayer.addTo(map);
+  const osmLayer = L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom: 19,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }
+  );
+  osmLayer.addTo(map);
 
-    const umkmLocations = [
-      { 
-        name: "Kopita Coffea", 
-        rating: "4.2",
-        reviews: 45,
-        category: "Kedai Kopi",
-        buka: "Buka · Tutup pukul 02.00 🔻",
-        alamat: "Alamat : Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Benteng, Sulawesi Selatan 92812",
-        phone: "Telepon : 0858-2769-6334",
-        coords: [-6.115228, 120.462124],
-        imageUrl: "./kopita.jpg",
-        hours: {
-          "Senin": "08.00–00.00",
-          "Selasa": "08.00–00.00",
-          "Rabu": "08.00–00.00",
-          "Kamis": "08.00–00.00",
-          "Jumat": "08.00–02.00",
-          "Sabtu": "08.00–02.00",
-          "Minggu": "08.00–00.00"
+  // Load UMKM locations GeoJSON
+  fetch("path/to/umkm_kecamatanBenteng.geojson") // Ganti dengan path file GeoJSON UMKM Anda
+    .then(response => response.json())
+    .then(data => {
+      L.geoJSON(data, {
+        onEachFeature: function(feature, layer) {
+          if (feature.properties) {
+            layer.bindPopup(`
+              <div class="popup-container">
+                <div class="popup-header">${feature.properties.name || "No Name"}</div>
+                <div class="popup-rating">⭐ ${feature.properties.rating || "N/A"} <span>(${feature.properties.reviews || 0})</span></div>
+                <div class="popup-category">${feature.properties.category || "N/A"}</div>
+                <img src="${feature.properties.imageUrl || "./default.jpg"}" alt="${feature.properties.name}" class="popup-image" />
+                <div class="popup-address">
+                  <i class="fas fa-map-marker-alt"></i> ${feature.properties.alamat || "No Address"}
+                </div>
+                <div class="popup-contact">
+                  <i class="fas fa-phone-alt"></i> ${feature.properties.phone || "No Phone"}
+                </div>
+              </div>
+            `, { maxWidth: "auto" });
+          }
         }
-      }
-    ];
+      }).addTo(map);
+    })
+    .catch(error => console.error("Error loading UMKM GeoJSON:", error));
 
-    umkmLocations.forEach((umkm) => {
-      const hoursDropdown = Object.entries(umkm.hours)
-        .map(([day, hours]) => `<div>${day}: ${hours}</div>`)
-        .join("");
+  // Load Jalan GeoJSON (Street Lines)
+  fetch("path/to/jalanBentengAnjay.geojson") // Ganti dengan path file GeoJSON Jalan Anda
+    .then(response => response.json())
+    .then(data => {
+      L.geoJSON(data, {
+        style: function(feature) {
+          return {
+            color: "#ff7800", // Warna garis jalan
+            weight: 2,       // Ketebalan garis jalan
+            opacity: 0.65
+          };
+        }
+      }).addTo(map);
+    })
+    .catch(error => console.error("Error loading Jalan GeoJSON:", error));
+});
 
-      const marker = L.marker(umkm.coords).addTo(map);
-      marker.bindPopup(`
-        <div class="popup-container">
-          <div class="popup-header">${umkm.name}</div>
-          <div class="popup-rating">⭐ ${umkm.rating} <span>(${umkm.reviews})</span></div>
-          <div class="popup-category">${umkm.category}</div>
-          <img src="${umkm.imageUrl}" alt="${umkm.name}" class="popup-image" />
-          <div class="popup-address">
-            <i class="fas fa-map-marker-alt"></i> ${umkm.alamat}
-          </div>
-          <div class="dropdown">
-            <div class="popup-hours">
-              <i class="fas fa-clock"></i> <span>${umkm.buka}</span>
-            </div>
-            <div class="dropdown-content">
-              ${hoursDropdown}
-            </div>
-          </div>
-          <div class="popup-contact">
-            <i class="fas fa-phone-alt"></i> ${umkm.phone}
-          </div>
-        </div>
-      `, { maxWidth: "auto" });
-    });
-  });
 </script>
 
 <!-- Font Awesome untuk ikon -->
