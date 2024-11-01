@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
     `, { maxWidth: "auto" });
 
     // Memuat file GeoJSON untuk garis jalan
-    fetch('./jalanBentegAnjay.geojson')
+    fetch('./jalanBentengAnjay.geojson')
         .then(response => response.json())
         .then(geojsonData => {
             L.geoJSON(geojsonData, {
