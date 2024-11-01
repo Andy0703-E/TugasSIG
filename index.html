@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kopita Coffea Page</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+      margin: 20px auto;
+    }
+    .popup-container {
+      text-align: left;
+      font-family: Roboto, sans-serif;
+      width: 50vw; /* 50% dari lebar viewport */
+      max-width: 100%;
+      height: 50vh; /* 50% dari tinggi viewport */
+      overflow-y: auto;
+    }
+    .popup-header {
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    .popup-rating {
+      color: #f39c12;
+      font-size: 1em;
+    }
+    .popup-address, .popup-contact {
+      margin-top: 5px;
+      font-size: 1em;
+      color: #555;
+    }
+    .popup-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .dropdown-content {
+      display: none;
+      background-color: #f9f9f9;
+      padding: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
+      border-radius: 8px;
+      margin-top: 5px;
+      max-width: 100%;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .about-section {
+      padding: 20px;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+<nav class="bg-gray-800 text-white flex items-center justify-between p-4">
+  <a href="#" class="text-2xl font-bold">kopita<span class="text-orange-500">coffea</span>.</a>
+
+  <div class="hidden md:flex space-x-4 ml-auto">
+    <a href="#home" class="hover:text-orange-500 font-semibold">Home</a> 
+    <a href="#about" class="hover:text-orange-500 font-semibold">Tentang</a>
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <a href="#" id="search-button" class="hover:text-orange-500"><i data-feather="search"></i></a>
+    <a href="#" id="shopping-cart-button" class="hover:text-orange-500"><i data-feather="shopping-cart"></i></a>
+    <a href="#" id="hamburger-menu" class="md:hidden hover:text-orange-500"><i data-feather="menu"></i></a>
+  </div>
+</nav>
+
+<div id="map"></div>
+
+<!-- Bagian About -->
+<div id="about" class="about-section">
+  <h2 class="text-3xl font-bold text-center mb-4">Tentang Kopita Coffea</h2>
+  <p class="text-lg text-gray-700 text-center">
+    Kopita Coffea adalah kedai kopi yang berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan. 
+    Kami menyediakan berbagai macam kopi lokal yang disajikan dengan kualitas terbaik dan suasana yang nyaman. 
+    Dengan pelayanan ramah dan suasana yang hangat, kami berkomitmen untuk menjadi tempat berkumpul yang ideal bagi 
+    para pencinta kopi dan komunitas lokal. 
+  </p>
+  <p class="text-lg text-gray-700 text-center mt-4">
+    Kami juga mengadakan berbagai acara dan workshop untuk meningkatkan pengalaman para pelanggan kami dalam 
+    menikmati kopi dan belajar lebih banyak tentang dunia kopi. Bergabunglah bersama kami untuk menikmati 
+    pengalaman kopi yang tak terlupakan!
+  </p>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const map = L.map('map').setView([-6.115228, 120.462124], 16);
+
+    const osmLayer = L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }
+    );
+    osmLayer.addTo(map);
+
+    const umkmLocations = [
+      { 
+        name: "Kopita Coffea", 
+        rating: "4.2",
+        reviews: 45,
+        category: "Kedai Kopi",
+        buka: "Buka · Tutup pukul 02.00 🔻",
+        alamat: "Alamat : Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Benteng, Sulawesi Selatan 92812",
+        phone: "Telepon : 0858-2769-6334",
+        coords: [-6.115228, 120.462124],
+        imageUrl: "data/kopita.jpg",
+        hours: {
+          "Senin": "08.00–00.00",
+          "Selasa": "08.00–00.00",
+          "Rabu": "08.00–00.00",
+          "Kamis": "08.00–00.00",
+          "Jumat": "08.00–02.00",
+          "Sabtu": "08.00–02.00",
+          "Minggu": "08.00–00.00"
+        }
+      }
+    ];
+
+    umkmLocations.forEach((umkm) => {
+      const hoursDropdown = Object.entries(umkm.hours)
+        .map(([day, hours]) => `<div>${day}: ${hours}</div>`)
+        .join("");
+
+      const marker = L.marker(umkm.coords).addTo(map);
+      marker.bindPopup(`
+        <div class="popup-container">
+          <div class="popup-header">${umkm.name}</div>
+          <div class="popup-rating">⭐ ${umkm.rating} <span>(${umkm.reviews})</span></div>
+          <div class="popup-category">${umkm.category}</div>
+          <img src="${umkm.imageUrl}" alt="${umkm.name}" class="popup-image" />
+          <div class="popup-address">
+            <i class="fas fa-map-marker-alt"></i> ${umkm.alamat}
+          </div>
+          <div class="dropdown">
+            <div class="popup-hours">
+              <i class="fas fa-clock"></i> <span>${umkm.buka}</span>
+            </div>
+            <div class="dropdown-content">
+              ${hoursDropdown}
+            </div>
+          </div>
+          <div class="popup-contact">
+            <i class="fas fa-phone-alt"></i> ${umkm.phone}
+          </div>
+        </div>
+      `, { maxWidth: "auto" });
+    });
+  });
+</script>
+
+<!-- Font Awesome untuk ikon -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
