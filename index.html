@@ -1,187 +1,247 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kopita Coffea Page</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kopita Coffea Page</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
   <style>
-    #map {
-      height: 500px;
-      width: 100%;
-      margin: 20px auto;
-    }
+    /* Menyesuaikan gaya popup */
     .popup-container {
-      text-align: left;
-      font-family: Roboto, sans-serif;
-      width: 50vw; /* 50% dari lebar viewport */
-      max-width: 100%;
-      height: 50vh; /* 50% dari tinggi viewport */
-      overflow-y: auto;
+      width: 50vw; /* Setengah layar */
+      max-height: 50vh; /* Setengah tinggi layar */
+      overflow-y: auto; /* Agar bisa di-scroll jika konten melebihi */
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
     }
     .popup-header {
+      font-size: 24px;
       font-weight: bold;
-      font-size: 1.5em;
-      margin-bottom: 0.5em;
+      margin-bottom: 8px;
     }
     .popup-rating {
-      color: #f39c12;
-      font-size: 1em;
+      font-size: 18px;
+      color: #ffc107;
+      margin-bottom: 8px;
     }
-    .popup-address, .popup-contact {
-      margin-top: 5px;
-      font-size: 1em;
-      color: #555;
+    .popup-category {
+      font-size: 16px;
+      color: #777;
+      margin-bottom: 12px;
     }
     .popup-image {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
+      height: auto;
       border-radius: 8px;
-      margin: 10px 0;
+      margin-bottom: 12px;
     }
-    .dropdown-content {
-      display: none;
-      background-color: #f9f9f9;
-      padding: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 1;
-      border-radius: 8px;
-      margin-top: 5px;
-      max-width: 100%;
+    .popup-address,
+    .popup-hours,
+    .popup-contact {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    .about-section {
-      padding: 20px;
-      background-color: #f3f4f6;
+    .marker-tooltip {
+      background-color: #333;
+      color: white;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
     }
   </style>
-</head>
-<body>
-<nav class="bg-gray-800 text-white flex items-center justify-between p-4">
-  <a href="#" class="text-2xl font-bold">kopita<span class="text-orange-500">coffea</span>.</a>
+  <body class="bg-gray-100 font-roboto">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 text-white flex items-center justify-between p-4">
+      <a href="#" class="text-2xl font-bold"
+        >kopita<span class="text-orange-500">coffea</span>.</a
+      >
+      <div class="hidden md:flex space-x-4 ml-auto">
+        <a href="#home" class="hover:text-orange-500 font-semibold">Home</a>
+        <a href="#about" class="hover:text-orange-500 font-semibold">Tentang</a>
+        <a href="#detail" class="hover:text-orange-500 font-semibold">Detail</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="#" id="search-button" class="hover:text-orange-500"
+          ><i data-feather="search"></i
+        ></a>
+        <a href="#" id="shopping-cart-button" class="hover:text-orange-500"
+          ><i data-feather="shopping-cart"></i
+        ></a>
+        <a href="#" id="hamburger-menu" class="md:hidden hover:text-orange-500"
+          ><i data-feather="menu"></i
+        ></a>
+      </div>
+    </nav>
 
-  <div class="hidden md:flex space-x-4 ml-auto">
-    <a href="#home" class="hover:text-orange-500 font-semibold">Home</a> 
-    <a href="#about" class="hover:text-orange-500 font-semibold">Tentang</a>
-  </div>
+    <!-- Map Section -->
+    <div id="map" class="h-96 w-full mt-8 mx-auto"></div>
 
-  <div class="flex items-center space-x-4">
-    <a href="#" id="search-button" class="hover:text-orange-500"><i data-feather="search"></i></a>
-    <a href="#" id="shopping-cart-button" class="hover:text-orange-500"><i data-feather="shopping-cart"></i></a>
-    <a href="#" id="hamburger-menu" class="md:hidden hover:text-orange-500"><i data-feather="menu"></i></a>
-  </div>
-</nav>
+    <!-- About Section -->
+    <section
+      id="about"
+      class="py-8 px-4 bg-gray-50 text-center md:text-left w-full"
+    >
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Tentang</h2>
+      <p class="text-lg text-gray-700 mb-4">
+        Kopita Coffea adalah kedai kopi yang berlokasi di Jl. Kemiri Nomor 21A,
+        Benteng, Kec. Benteng, Sulawesi Selatan. Kami menyediakan berbagai macam
+        kopi lokal yang disajikan dengan kualitas terbaik dan suasana yang
+        nyaman.
+      </p>
+    </section>
 
-<div id="map"></div>
-
-<!-- Bagian About -->
-<div id="about" class="about-section">
-  <h2 class="text-3xl font-bold text-center mb-4">Tentang Kopita Coffea</h2>
-  <p class="text-lg text-gray-700 text-center">
-    Kopita Coffea adalah kedai kopi yang berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan. 
-    Kami menyediakan berbagai macam kopi lokal yang disajikan dengan kualitas terbaik dan suasana yang nyaman. 
-    Dengan pelayanan ramah dan suasana yang hangat, kami berkomitmen untuk menjadi tempat berkumpul yang ideal bagi 
-    para pencinta kopi dan komunitas lokal. 
-  </p>
-  <p class="text-lg text-gray-700 text-center mt-4">
-    Kami juga mengadakan berbagai acara dan workshop untuk meningkatkan pengalaman para pelanggan kami dalam 
-    menikmati kopi dan belajar lebih banyak tentang dunia kopi. Bergabunglah bersama kami untuk menikmati 
-    pengalaman kopi yang tak terlupakan!
-  </p>
-</div>
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const map = L.map('map').setView([-6.115219, 120.462126], 16);
-
-    // Data UMKM dengan titik lokasi dan informasi popup
-    const umkmData = {
-        name: "Kopita Coffea",
-        rating: "4.2",
-        reviews: 45,
-        category: "Kedai Kopi",
-        buka: "Buka · Tutup pukul 02.00 🔻",
-        alamat: "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
-        phone: "0858-2769-6334",
-        coords: [-6.115219, 120.462126],
-        imageUrl: "./kopita.jpg",
-        hours: {
-            "Senin": "08.00–00.00",
-            "Selasa": "08.00–00.00",
-            "Rabu": "08.00–00.00",
-            "Kamis": "08.00–00.00",
-            "Jumat": "08.00–02.00",
-            "Sabtu": "08.00–02.00",
-            "Minggu": "08.00–00.00"
-        }
-    };
-
-    // Marker untuk UMKM
-    const marker = L.marker(umkmData.coords).addTo(map);
-    const hoursDropdown = Object.entries(umkmData.hours)
-        .map(([day, hours]) => `<div>${day}: ${hours}</div>`)
-        .join("");
-
-    marker.bindPopup(`
-        <div class="popup-container">
-            <div class="popup-header">${umkmData.name}</div>
-            <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
-            <div class="popup-category">${umkmData.category}</div>
-            <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
-            <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
-            <div class="dropdown">
-                <div class="popup-hours">
-                    <i class="fas fa-clock"></i> <span>${umkmData.buka}</span>
-                </div>
-                <div class="dropdown-content">
-                    ${hoursDropdown}
-                </div>
-            </div>
-            <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+    <!-- Detail Section -->
+    <section
+      id="detail"
+      class="py-8 px-4 bg-white text-center md:text-left w-full mt-4"
+    >
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Detail</h2>
+      <div id="umkm-detail" class="text-lg text-gray-700">
+        <div class="mb-4"><strong>Nama:</strong> Kopita Coffea</div>
+        <div class="mb-4">
+          <strong>Alamat:</strong> Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng,
+          Sulawesi Selatan 92812
         </div>
-    `, { maxWidth: "auto" });
+        <div class="mb-4">
+          <strong>Koordinat:</strong>
+          <span class="font-semibold">(-6.115219, 120.462126)</span>
+        </div>
+        <div class="mb-4"><strong>Kategori:</strong> Kedai Kopi</div>
+        <div class="mb-4">
+          <strong>Jam Buka:</strong>
+          <ul class="list-disc list-inside">
+            <li>Senin: 08.00–00.00</li>
+            <li>Selasa: 08.00–00.00</li>
+            <li>Rabu: 08.00–00.00</li>
+            <li>Kamis: 08.00–00.00</li>
+            <li>Jumat: 08.00–02.00</li>
+            <li>Sabtu: 08.00–02.00</li>
+            <li>Minggu: 08.00–00.00</li>
+          </ul>
+        </div>
+        <div class="mb-4"><strong>Telepon:</strong> 0858-2769-6334</div>
+        <div class="mb-4">
+          <strong>Deskripsi:</strong> Kopita Coffea adalah kedai kopi yang
+          menawarkan berbagai macam kopi lokal dengan kualitas terbaik dalam
+          suasana yang nyaman. Kami juga mengadakan berbagai acara dan workshop
+          untuk meningkatkan pengalaman pelanggan.
+        </div>
+      </div>
+    </section>
 
-    // Memuat file GeoJSON untuk garis jalan
-    fetch('./jalanBentengAnjay.geojson')
-        .then(response => response.json())
-        .then(geojsonData => {
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+      <p>
+        Kopita Coffea - Jl. Kemiri Nomor 21A, Benteng, Sulawesi Selatan 92812
+      </p>
+      <p>📞 Hubungi kami: 0858-2769-6334</p>
+      <div class="flex justify-center mt-2 space-x-4">
+        <a href="#" class="text-xl hover:text-orange-500"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="#" class="text-xl hover:text-orange-500"
+          ><i class="fab fa-instagram"></i
+        ></a>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const map = L.map("map").setView([-6.115219, 120.462126], 18);
+
+        const umkmData = {
+          name: "Kopita Coffea",
+          rating: "4.2",
+          reviews: 45,
+          category: "Kedai Kopi",
+          buka: "Buka · Tutup pukul 02.00 🔻",
+          alamat:
+            "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
+          phone: "0858-2769-6334",
+          coords: [-6.115219, 120.462126],
+          imageUrl: "./kopita.jpg",
+          hours: {
+            Senin: "08.00–00.00",
+            Selasa: "08.00–00.00",
+            Rabu: "08.00–00.00",
+            Kamis: "08.00–00.00",
+            Jumat: "08.00–02.00",
+            Sabtu: "08.00–02.00",
+            Minggu: "08.00–00.00",
+          },
+        };
+
+        const marker = L.marker(umkmData.coords).addTo(map);
+
+        // Menambahkan tooltip permanen pada marker
+        marker.bindTooltip(umkmData.name, {
+          permanent: true,
+          direction: "top",
+          className: "marker-tooltip",
+        });
+
+        marker.bindPopup(`
+                <div class="popup-container">
+                    <div class="popup-header">${umkmData.name}</div>
+                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
+                    <div class="popup-category">${umkmData.category}</div>
+                    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+                </div>
+            `);
+
+        fetch("./jalanBentengAnjay.geojson")
+          .then((response) => response.json())
+          .then((geojsonData) => {
             L.geoJSON(geojsonData, {
-                style: {
-                    color: "#ff7800",
-                    weight: 2,
-                    opacity: 0.65
-                }
+              style: {
+                color: "#f0f0f0",
+                weight: 3,
+                opacity: 1,
+              },
             }).addTo(map);
-        })
-        .catch(error => console.error("Error loading jalan GeoJSON:", error));
+          })
+          .catch((error) =>
+            console.error("Error loading jalan GeoJSON:", error)
+          );
 
-    // Memuat file GeoJSON untuk Kecamatan Benteng
-    fetch('./kecamatanBenteng.geojson') // Ganti dengan path file kecamatanBenteng.geojson Anda
-        .then(response => response.json())
-        .then(geojsonData => {
+        fetch("./kecamatanBenteng.geojson")
+          .then((response) => response.json())
+          .then((geojsonData) => {
             L.geoJSON(geojsonData, {
-                style: {
-                    color: "#3388ff",
-                    weight: 1.5,
-                    opacity: 0.8,
-                    fillColor: "#3388ff",
-                    fillOpacity: 0.1
-                }
+              style: {
+                color: "#333",
+                weight: 1.5,
+                opacity: 0.8,
+                fillColor: "#333",
+                fillOpacity: 0.1,
+              },
             }).addTo(map);
-        })
-        .catch(error => console.error("Error loading kecamatanBenteng GeoJSON:", error));
-});
+          })
+          .catch((error) =>
+            console.error("Error loading kecamatanBenteng GeoJSON:", error)
+          );
+      });
+    </script>
 
-</script>
-
-<!-- Font Awesome untuk ikon -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
