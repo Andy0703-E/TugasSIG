@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
   osmLayer.addTo(map);
 
   // Load UMKM locations GeoJSON
-  fetch("path/to/umkm_kecamatanBenteng.geojson") // Ganti dengan path file GeoJSON UMKM Anda
+  fetch("./kecamatanBenteng.geojson") // Ganti dengan path file GeoJSON UMKM Anda
     .then(response => response.json())
     .then(data => {
       L.geoJSON(data, {
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => console.error("Error loading UMKM GeoJSON:", error));
 
   // Load Jalan GeoJSON (Street Lines)
-  fetch("path/to/jalanBentengAnjay.geojson") // Ganti dengan path file GeoJSON Jalan Anda
+  fetch("./jalanBentengAnjay.geojson") // Ganti dengan path file GeoJSON Jalan Anda
     .then(response => response.json())
     .then(data => {
       L.geoJSON(data, {
