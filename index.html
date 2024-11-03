@@ -231,113 +231,113 @@
   </div>
   <br>
   <!-- Konten Utama -->
- <div class="mb-2">
+  <div class="mb-2">
     <div class="w-full mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="shadow-lg rounded-lg p-4 bg-white">
-            <h1 id="peta" class="text-center text-2xl font-bold mb-4">Peta</h1>
-            <div id="map" class="w-full h-96 md:h-full rounded-lg"></div>
-        </div>
-
-        <div class="bg-gray-200 shadow rounded-lg p-6 flex flex-col h-full">
-            <h1 id="saran" class="text-center text-2xl font-bold mb-4">Saran</h1>
-            <form id="contact-form" class="flex-grow">
-                <div class="mb-4">
-                    <label class="block text-gray-700 h-40 text-sm font-bold mb-2" for="message"></label>
-                    <textarea id="message"
-                        class="bg-white shadow appearance-none border rounded w-full h-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        required></textarea>
-                </div>
-                <div class="mb-0">
-                    <button type="submit" style="background-color: rgb(153, 102, 51); transition: 0.5s"
-                        class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:opacity-80">
-                        Kirim
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-    <br>
-    <!-- Bagian Detail -->
-    <h1 id="detail" class="text-3xl text-white font-bold text-center">
-      Detail
-    </h1>
-    <br>
-    <div class="bg-gray-200 w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
-      <h2 class="text-2xl text-center font-bold mb-2">Jam Buka</h2>
-      <ul class="mb-4 text-center">
-        <li>Senin: 08.00 - 00.00</li>
-        <li>Selasa: 08.00 - 00.00</li>
-        <li>Rabu: 08.00 - 00.00</li>
-        <li>Kamis: 08.00 - 00.00</li>
-        <li>Jumat: 08.00 - 02.00</li>
-        <li>Sabtu: 08.00 - 02.00</li>
-        <li>Minggu: 08.00 - 00.00</li>
-      </ul>
-      <h2 id="kontak" class="text-2xl text-center font-bold mb-2">Kontak Kami</h2>
-      <p class="mb-4 text-center">
-        Jika Anda memiliki pertanyaan atau ingin melakukan reservasi, jangan
-        ragu untuk menghubungi kami melalui:
-      </p>
-      <p class="text-center"><strong>Telepon:</strong> 0858-2769-6334</p>
-      <h2 class="text-2xl text-center font-bold mb-2">Lokasi</h2>
-      <p class="mb-4 text-center">
-        Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi
-        Selatan 92812. Silakan kunjungi kami untuk menikmati kopi terbaik di
-        daerah ini!
-      </p>
-    </div>
-    <br>
-    <!-- Bagian Footer -->
-    <footer style="background: rgb(153, 102, 51)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
-      <div class="container mx-auto text-center w-full">
-        <p class="mb-2 font-semibold">
-          <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
-        </p>
+      <div class="shadow-lg rounded-lg p-4 bg-white">
+        <h1 id="peta" class="text-center text-2xl font-bold mb-4">Peta</h1>
+        <div id="map" class="w-full h-96 md:h-full rounded-lg"></div>
       </div>
-    </footer>
 
-    <!-- Skrip -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+      <div class="bg-gray-200 shadow rounded-lg p-6 flex flex-col h-full">
+        <h1 id="saran" class="text-center text-2xl font-bold mb-4">Saran</h1>
+        <form id="contact-form" class="flex-grow">
+          <div class="mb-4">
+            <label class="block text-gray-700 h-40 text-sm font-bold mb-2" for="message"></label>
+            <textarea id="message"
+              class="bg-white shadow appearance-none border rounded w-full h-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required></textarea>
+          </div>
+          <div class="mb-0">
+            <button type="submit" style="background-color: rgb(153, 102, 51); transition: 0.5s"
+              class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:opacity-80">
+              Kirim
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const map = L.map("map").setView([-6.115219, 120.462126], 18);
 
-        const umkmData = {
-          name: "Kopita Coffea",
-          rating: "4.2",
-          reviews: 45,
-          category: "Kedai Kopi",
-          buka: "Buka · Tutup pukul 02.00 🔻",
-          alamat:
-            "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
-          phone: "0858-2769-6334",
-          coords: [-6.115219, 120.462126],
-          imageUrl: "./kopita.jpg",
-          hours: {
-            Senin: "08.00–00.00",
-            Selasa: "08.00–00.00",
-            Rabu: "08.00–00.00",
-            Kamis: "08.00–00.00",
-            Jumat: "08.00–02.00",
-            Sabtu: "08.00–02.00",
-            Minggu: "08.00–00.00",
-          },
-        };
+  <br>
+  <!-- Bagian Detail -->
+  <h1 id="detail" class="text-3xl text-white font-bold text-center">
+    Detail
+  </h1>
+  <br>
+  <div class="bg-gray-200 w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
+    <h2 class="text-2xl text-center font-bold mb-2">Jam Buka</h2>
+    <ul class="mb-4 text-center">
+      <li>Senin: 08.00 - 00.00</li>
+      <li>Selasa: 08.00 - 00.00</li>
+      <li>Rabu: 08.00 - 00.00</li>
+      <li>Kamis: 08.00 - 00.00</li>
+      <li>Jumat: 08.00 - 02.00</li>
+      <li>Sabtu: 08.00 - 02.00</li>
+      <li>Minggu: 08.00 - 00.00</li>
+    </ul>
+    <h2 id="kontak" class="text-2xl text-center font-bold mb-2">Kontak Kami</h2>
+    <p class="mb-4 text-center">
+      Jika Anda memiliki pertanyaan atau ingin melakukan reservasi, jangan
+      ragu untuk menghubungi kami melalui:
+    </p>
+    <p class="text-center"><strong>Telepon:</strong> 0858-2769-6334</p>
+    <h2 class="text-2xl text-center font-bold mb-2">Lokasi</h2>
+    <p class="mb-4 text-center">
+      Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi
+      Selatan 92812. Silakan kunjungi kami untuk menikmati kopi terbaik di
+      daerah ini!
+    </p>
+  </div>
+  <br>
+  <!-- Bagian Footer -->
+  <footer style="background: rgb(153, 102, 51)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+    <div class="container mx-auto text-center w-full">
+      <p class="mb-2 font-semibold">
+        <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+      </p>
+    </div>
+  </footer>
 
-        const marker = L.marker(umkmData.coords).addTo(map);
+  <!-- Skrip -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-        // Menambahkan tooltip permanen pada marker
-        marker.bindTooltip(umkmData.name, {
-          permanent: true,
-          direction: "top",
-          className: "marker-tooltip",
-        });
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const map = L.map("map").setView([-6.115219, 120.462126], 18);
 
-        marker.bindPopup(`
+      const umkmData = {
+        name: "Kopita Coffea",
+        rating: "4.2",
+        reviews: 45,
+        category: "Kedai Kopi",
+        buka: "Buka · Tutup pukul 02.00 🔻",
+        alamat:
+          "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
+        phone: "0858-2769-6334",
+        coords: [-6.115219, 120.462126],
+        imageUrl: "./kopita.jpg",
+        hours: {
+          Senin: "08.00–00.00",
+          Selasa: "08.00–00.00",
+          Rabu: "08.00–00.00",
+          Kamis: "08.00–00.00",
+          Jumat: "08.00–02.00",
+          Sabtu: "08.00–02.00",
+          Minggu: "08.00–00.00",
+        },
+      };
+
+      const marker = L.marker(umkmData.coords).addTo(map);
+
+      // Menambahkan tooltip permanen pada marker
+      marker.bindTooltip(umkmData.name, {
+        permanent: true,
+        direction: "top",
+        className: "marker-tooltip",
+      });
+
+      marker.bindPopup(`
                 <div class="popup-container">
                     <div class="popup-header">${umkmData.name}</div>
                     <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
@@ -349,95 +349,89 @@
                 </div>
             `);
 
-        fetch("./jalanBentengAnjay.geojson")
-          .then((response) => response.json())
-          .then((geojsonData) => {
-            L.geoJSON(geojsonData, {
-              style: {
-                color: "#f0f0f0",
-                weight: 3,
-                opacity: 1,
-              },
-            }).addTo(map);
-          })
-          .catch((error) =>
-            console.error("Error loading jalan GeoJSON:", error)
-          );
+      fetch("./jalanBentengAnjay.geojson")
+        .then((response) => response.json())
+        .then((geojsonData) => {
+          L.geoJSON(geojsonData, {
+            style: {
+              color: "#f0f0f0",
+              weight: 3,
+              opacity: 1,
+            },
+          }).addTo(map);
+        })
+        .catch((error) =>
+          console.error("Error loading jalan GeoJSON:", error)
+        );
 
-        fetch("./kecamatanBenteng.geojson")
-          .then((response) => response.json())
-          .then((geojsonData) => {
-            L.geoJSON(geojsonData, {
-              style: {
-                color: "#333",
-                weight: 1.5,
-                opacity: 0.8,
-                fillColor: "#333",
-                fillOpacity: 0.1,
-              },
-            }).addTo(map);
-          })
-          .catch((error) =>
-            console.error("Error loading kecamatanBenteng GeoJSON:", error)
-          );
-      });
-      // Ambil elemen sidebar dan tombol
-      const sidebar = document.getElementById("sidebar");
-      const sidebarToggle = document.getElementById("sidebar-toggle");
-      const closeSidebar = document.getElementById("close-sidebar");
+      fetch("./kecamatanBenteng.geojson")
+        .then((response) => response.json())
+        .then((geojsonData) => {
+          L.geoJSON(geojsonData, {
+            style: {
+              color: "#333",
+              weight: 1.5,
+              opacity: 0.8,
+              fillColor: "#333",
+              fillOpacity: 0.1,
+            },
+          }).addTo(map);
+        })
+        .catch((error) =>
+          console.error("Error loading kecamatanBenteng GeoJSON:", error)
+        );
+    });
+    // Ambil elemen sidebar dan tombol
+    const sidebar = document.getElementById("sidebar");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const closeSidebar = document.getElementById("close-sidebar");
 
-      // Fungsi untuk membuka sidebar
-      sidebarToggle.addEventListener("click", function () {
-        sidebar.style.left = "0px";
-      });
+    // Fungsi untuk membuka sidebar
+    sidebarToggle.addEventListener("click", function () {
+      sidebar.style.left = "0px";
+    });
 
-      // Fungsi untuk menutup sidebar
-      closeSidebar.addEventListener("click", function () {
+    // Fungsi untuk menutup sidebar
+    closeSidebar.addEventListener("click", function () {
+      sidebar.style.left = "-250px";
+    });
+
+    // Ambil semua tautan di sidebar
+    const sidebarLinks = document.querySelectorAll(".sidebar");
+
+    // Tambahkan event listener untuk setiap tautan
+    sidebarLinks.forEach((link) => {
+      link.addEventListener("click", function () {
         sidebar.style.left = "-250px";
       });
+    });
 
-      // Ambil semua tautan di sidebar
-      const sidebarLinks = document.querySelectorAll(".sidebar");
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+  <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("Bijk8UDVwatT5EPPK");
+    })();
 
-      // Tambahkan event listener untuk setiap tautan
-      sidebarLinks.forEach((link) => {
-        link.addEventListener("click", function () {
-          sidebar.style.left = "-250px"; // Tutup sidebar saat tautan diklik
+    document.getElementById('contact-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      // Ambil nilai pesan dari textarea
+      const message = document.getElementById('message').value;
+
+      // Kirim data ke EmailJS
+      emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
+        message: message,
+      })
+        .then(function (response) {
+          console.log('SUCCESS!', response.status, response.text);
+          alert('Pesan terkirim!');
+        }, function (error) {
+          console.log('FAILED...', error);
+          alert('Pesan gagal terkirim.');
         });
-      });
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
-    <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
-    <script>
-     (function(){
-            emailjs.init("Bijk8UDVwatT5EPPK"); 
-        })();
-
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah pengiriman formulir default
-
-            // Ambil nilai pesan dari textarea
-            const message = document.getElementById('message').value;
-
-            // Kirim data ke EmailJS
-            emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
-                message: message,
-            })
-            .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-                alert('Pesan terkirim!');
-            }, function(error) {
-                console.log('FAILED...', error);
-                alert('Pesan gagal terkirim.');
-            });
-        });
-    </script>
-
-
-
-    <!-- Font Awesome untuk ikon -->
-    <script src="https://kit.fontawesome.com/a 076d05399.js" crossorigin="anonymous"></script>
+    });
+  </script>
 </body>
 
 </html>
