@@ -21,3 +21,14 @@ Selamat datang di **Kopita Coffea**, kedai kopi yang menawarkan berbagai macam k
 1. **Clone Repository**:
    ```bash
    git clone <URL_REPOSITORY>
+2.cd kopita-coffea
+
+3.open index.html
+
+## Cara Menggunakan
+Navigasikan menggunakan menu yang tersedia di bagian atas.
+Lihat menu kami dan pilih minuman atau makanan yang Anda inginkan.
+Gunakan peta untuk menemukan lokasi kami.
+Kirimkan saran Anda melalui formulir yang ada di halaman saran.
+Kontribusi
+Jika Anda ingin berkontribusi pada proyek ini, silakan buka isu atau kirimkan permintaan tarik (pull request).
