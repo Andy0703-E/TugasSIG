@@ -21,9 +21,13 @@ Selamat datang di **Kopita Coffea**, kedai kopi yang menawarkan berbagai macam k
 1. **Clone Repository**:
    ```bash
    git clone <URL_REPOSITORY>
-2.cd kopita-coffea
+2. **Clone Repository**:
+   ```bash
+   cd kopita-coffea
 
-3.open index.html
+3. **Clone Repository**:
+   ```bash
+   open index.html
 
 ## Cara Menggunakan
 Navigasikan menggunakan menu yang tersedia di bagian atas.
