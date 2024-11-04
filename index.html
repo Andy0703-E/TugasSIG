@@ -75,7 +75,6 @@
       position: fixed;
       top: 0;
       left: -250px;
-      /* Initially hidden */
       height: 100%;
       background-color: rgb(153, 102, 51);
       transition: left 0.3s ease;
@@ -96,6 +95,15 @@
 
     .sidebar-toggle {
       cursor: pointer;
+    }
+
+    .menu-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
@@ -188,7 +196,7 @@
   <br>
   <div class="w-full mx-auto px-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <div style="background-color: rgb(153, 102, 51);" class="rounded-md shadow-md p-4">
+      <div style="background-color: rgb(153, 102, 51);" class="menu-card rounded-md shadow-md p-4">
         <h1 class="text-xl text-center text-white font-bold mb-2">Coffe</h1>
         <ul class="text-white text-center">
           <li class="mb-2"><em>Kopi Susu: 10k</em></li>
@@ -203,7 +211,7 @@
           <li class="mb-2"><em>Syphon Coffee (2 Cup): 20k</em></li>
         </ul>
       </div>
-      <div style="background-color: rgb(153, 102, 51);" class="rounded-md shadow-md p-4">
+      <div style="background-color: rgb(153, 102, 51);" class="menu-card rounded-md shadow-md p-4">
         <h1 class="text-xl text-center text-white font-bold mb-2">Juice</h1>
         <ul class="text-white text-center">
           <li class="mb-2"><em>Orange Juice: 10k</em></li>
@@ -213,7 +221,7 @@
           <li class="mb-2"><em>Strawberry Juice: 10k</em></li>
         </ul>
       </div>
-      <div style="background-color: rgb(153, 102, 51);" class=" rounded-md shadow-md p-4">
+      <div style="background-color: rgb(153, 102, 51);" class="menu-card rounded-md shadow-md p-4">
         <h1 class="text-xl text-center text-white font-bold mb-2">Food</h1>
         <ul class="text-white text-center">
           <li class="mb-2"><em>Nasi Goreng: 15k</em></li>
@@ -280,8 +288,8 @@
   <br>
   <div style="background-color: rgb(153, 102, 51);"
     class=" w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
-    <h2 class="text-2xl text-center font-bold mb-2">Jam Buka</h2>
-    <ul class="mb-4 text-center">
+    <h2 class="text-2xl text-center text-white font-bold mb-2">Jam Buka</h2>
+    <ul class="mb-4 text-center text-white">
       <li>Senin: 08.00 - 00.00</li>
       <li>Selasa: 08.00 - 00.00</li>
       <li>Rabu: 08.00 - 00.00</li>
@@ -290,14 +298,14 @@
       <li>Sabtu: 08.00 - 02.00</li>
       <li>Minggu: 08.00 - 00.00</li>
     </ul>
-    <h2 id="kontak" class="text-2xl text-center font-bold mb-2">Kontak Kami</h2>
-    <p class="mb-4 text-center">
+    <h2 id="kontak" class="text-2xl text-center text-white font-bold mb-2">Kontak Kami</h2>
+    <p class="mb-4 text-center text-white">
       Jika Anda memiliki pertanyaan atau ingin melakukan reservasi, jangan
       ragu untuk menghubungi kami melalui:
     </p>
-    <p class="text-center"><strong>Telepon:</strong> 0858-2769-6334</p>
-    <h2 class="text-2xl text-center font-bold mb-2">Lokasi</h2>
-    <p class="mb-4 text-center">
+    <p class="text-center text-white"><strong>Telepon:</strong> 0858-2769-6334</p>
+    <h2 class="text-2xl text-center text-white font-bold mb-2">Lokasi</h2>
+    <p class="mb-4 text-center text-white">
       Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi
       Selatan 92812. Silakan kunjungi kami untuk menikmati kopi terbaik di
       daerah ini!
@@ -307,18 +315,18 @@
   <!-- Bagian Footer -->
 
   <footer style="background: rgb(153, 102, 51)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
-    <div class="social-icons flex justify-center mt-4">
-      <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
-        <i class="fab fa-github fa-lg"></i>
-      </a>
-      <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
-        <i class="fab fa-facebook fa-lg"></i>
-      </a>
-      <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
-        <i class="fab fa-instagram fa-lg"></i>
-      </a>
-    </div>
     <div class="container mx-auto text-center w-full">
+      <div class="social-icons flex justify-center mt-4">
+        <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+          <i class="fab fa-github fa-lg"></i>
+        </a>
+        <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+          <i class="fab fa-facebook fa-lg"></i>
+        </a>
+        <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+          <i class="fab fa-instagram fa-lg"></i>
+        </a>
+      </div>
       <p class="mb-2 font-semibold">
         <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
       </p>
