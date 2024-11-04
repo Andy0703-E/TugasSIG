@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <title>Kopita | Coffea</title>
   <style>
     * {
@@ -111,22 +112,22 @@
     <a href="#detail"><em>Detail</em></a>
     <br />
     <br />
-    <br />
     <br>
     <br>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <br>
+
+    <div class="social-icons flex justify-center mt-4">
+      <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+        <i class="fab fa-facebook fa-lg"></i>
+      </a>
+      <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+        <i class="fab fa-instagram fa-lg"></i>
+      </a>
+    </div>
+
     <div class="footer mt-auto">
       <p class="mb-2 text-white text-center font-semibold">
         <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
@@ -188,8 +189,8 @@
   <div class="w-full mx-auto px-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <div style="background-color: rgb(153, 102, 51);" class="rounded-md shadow-md p-4">
-        <h1 class="text-xl text-center font-bold mb-2">Coffe</h1>
-        <ul class="text-white">
+        <h1 class="text-xl text-center text-white font-bold mb-2">Coffe</h1>
+        <ul class="text-white text-center">
           <li class="mb-2"><em>Kopi Susu: 10k</em></li>
           <li class="mb-2"><em>Selayar Island Coffee: 15k</em></li>
           <li class="mb-2"><em>Vietnam Drip Coffee: 15k</em></li>
@@ -203,8 +204,8 @@
         </ul>
       </div>
       <div style="background-color: rgb(153, 102, 51);" class="rounded-md shadow-md p-4">
-        <h1 class="text-xl text-center font-bold mb-2">Juice</h1>
-        <ul class="text-white">
+        <h1 class="text-xl text-center text-white font-bold mb-2">Juice</h1>
+        <ul class="text-white text-center">
           <li class="mb-2"><em>Orange Juice: 10k</em></li>
           <li class="mb-2"><em>Mango Juice: 10k</em></li>
           <li class="mb-2"><em>Watermelon Juice: 10k</em></li>
@@ -213,8 +214,8 @@
         </ul>
       </div>
       <div style="background-color: rgb(153, 102, 51);" class=" rounded-md shadow-md p-4">
-        <h1 class="text-xl text-center font-bold mb-2">Food</h1>
-        <ul class="text-white">
+        <h1 class="text-xl text-center text-white font-bold mb-2">Food</h1>
+        <ul class="text-white text-center">
           <li class="mb-2"><em>Nasi Goreng: 15k</em></li>
           <li class="mb-2"><em>Mie Goreng: 15k</em></li>
           <li class="mb-2"><em>Bakso: 15k</em></li>
@@ -227,27 +228,43 @@
   <br>
   <!-- Konten Utama -->
   <div class="mb-2">
-    <div class="w-full mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="shadow-lg rounded-lg p-4 bg-white">
+    <div style="background-color: rgb(153, 102, 51);"
+      class="w-full mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-gray-300 rounded-lg p-4 bg-white">
         <h1 id="peta" class="text-center text-2xl font-bold mb-4">Peta</h1>
         <div id="map" class="w-full h-96 md:h-full rounded-lg"></div>
       </div>
 
-      <div class="bg-gray-200 shadow rounded-lg p-6 flex flex-col h-full">
+      <div class="bg-gray-300 shadow rounded-lg p-6 flex flex-col h-full">
         <h1 id="saran" class="text-center text-2xl font-bold mb-4">Saran</h1>
         <p class="text-center">Berikan Saran Untuk Kami !!</p>
         <form id="contact-form" class="flex-grow">
           <div class="mb-4">
             <label class="block text-gray-700 h-40 text-sm font-bold mb-2" for="message"></label>
             <textarea id="message"
-              class="bg-white shadow appearance-none border rounded w-full h-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="bg-gray-200 appearance-none border rounded w-full h-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required></textarea>
           </div>
           <div class="mb-0">
-            <button type="submit" style="background-color: rgb(153, 102, 51); transition: 0.5s"
+            <div id="loading" class="hidden text-center">
+              <svg class="animate-spin h-5 w-5 text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+              <p id="loading-text" class="text-gray-700">Mengirim...</p>
+            </div>
+            <button id="submit-button" type="submit" style="background-color: rgb(153, 102, 51); transition: 0.5s"
               class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:opacity-80">
               Kirim
             </button>
+            <div id="checkmark" class="hidden text-center mt-2">
+              <svg class="h-5 w-5 text-green-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="2" d="M5 12l5 5L20 7" />
+              </svg>
+              <p class="text-green-600">Terkirim</p>
+            </div>
           </div>
         </form>
       </div>
@@ -261,7 +278,8 @@
     Detail
   </h1>
   <br>
-  <div class="bg-gray-200 w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
+  <div style="background-color: rgb(153, 102, 51);"
+    class=" w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
     <h2 class="text-2xl text-center font-bold mb-2">Jam Buka</h2>
     <ul class="mb-4 text-center">
       <li>Senin: 08.00 - 00.00</li>
@@ -287,7 +305,19 @@
   </div>
   <br>
   <!-- Bagian Footer -->
+
   <footer style="background: rgb(153, 102, 51)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+    <div class="social-icons flex justify-center mt-4">
+      <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+        <i class="fab fa-facebook fa-lg"></i>
+      </a>
+      <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+        <i class="fab fa-instagram fa-lg"></i>
+      </a>
+    </div>
     <div class="container mx-auto text-center w-full">
       <p class="mb-2 font-semibold">
         <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
@@ -299,6 +329,53 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <script>
+    document.getElementById('contact-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Tampilkan spinner loading
+      const loading = document.getElementById('loading');
+      const loadingText = document.getElementById('loading-text');
+      const submitButton = document.getElementById('submit-button');
+      const checkmark = document.getElementById('checkmark');
+
+      loading.classList.remove('hidden');
+      submitButton.classList.add('hidden'); // Sembunyikan tombol kirim
+
+      // Ambil nilai pesan dari textarea
+      const message = document.getElementById('message').value;
+
+      // Kirim data ke EmailJS
+      emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
+        message: message,
+      })
+        .then(function (response) {
+          console.log('SUCCESS!', response.status, response.text);
+          // Ubah teks menjadi "Terkirim"
+          loadingText.innerText = 'Terkirim';
+        }, function (error) {
+          console.log('FAILED...', error);
+          alert('Pesan gagal terkirim.');
+          // Tampilkan kembali tombol kirim jika gagal
+          submitButton.classList.remove('hidden');
+          loading.classList.add('hidden');
+        })
+        .finally(() => {
+          // Tampilkan centang setelah beberapa detik
+          setTimeout(() => {
+            loading.classList.add('hidden'); // Sembunyikan spinner
+            checkmark.classList.remove('hidden'); // Tampilkan centang
+            // Reset textarea
+            document.getElementById('message').value = '';
+            // Kembalikan teks ke "Mengirim..." setelah reset
+            loadingText.innerText = 'Mengirim...';
+            // Tampilkan tombol kirim kembali setelah beberapa detik
+            setTimeout(() => {
+              checkmark.classList.add('hidden');
+              submitButton.classList.remove('hidden');
+            }, 2000);
+          }, 2000);
+        });
+    });
     document.addEventListener("DOMContentLoaded", function () {
       const map = L.map("map").setView([-6.115219, 120.462126], 18);
 
@@ -420,8 +497,6 @@
         message: message,
       })
         .then(function (response) {
-          console.log('SUCCESS!', response.status, response.text);
-          alert('Pesan terkirim!');
         }, function (error) {
           console.log('FAILED...', error);
           alert('Pesan gagal terkirim.');
