@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <title>Kopita | Coffea</title>
   <style>
     * {
@@ -15,8 +16,25 @@
       box-sizing: border-box;
     }
 
-    #map {
-      height: 400px;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* Mengatur tinggi body untuk mengisi viewport */
+      overflow: hidden;
+      /* Menghilangkan scrolling */
+      background-color: #1a202c;
+      /* Warna latar belakang gelap */
+    }
+
+    .content {
+      text-align: center;
+      color: white;
+      max-width: 600px;
+      /* Mengatur lebar maksimum konten */
+      padding: 20px;
+      /* Memberikan sedikit padding */
     }
 
     .popup-container {
@@ -76,7 +94,7 @@
       top: 0;
       left: -250px;
       height: 100%;
-      background-color: rgb(153, 102, 51);
+      background-color: rgb(102, 51, 0);
       transition: left 0.3s ease;
       z-index: 1000;
     }
@@ -101,9 +119,9 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .menu-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    .fullscreen {
+      height: 100vh;
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -111,18 +129,15 @@
 <body class="bg-gray-900">
   <!-- Sidebar -->
   <div id="sidebar" class="sidebar">
-    <a href="#" id="close-sidebar" class="text-right px-4 py-2">✖</a>
-    <a href="./"><em>Beranda</em></a>
-    <a href="#menu"><em>Menu</em></a>
-    <a href="#peta"><em>Peta</em></a>
-    <a href="#saran"><em>Saran</em></a>
-    <a href="#kontak"><em>Kontak</em></a>
-    <a href="#detail"><em>Detail</em></a>
+    <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
+    <a href="./" class="text-white px-4 py-2"><em>Beranda</em></a>
+    <a href="./menu.html" class="text-white px-4 py-2"><em>Menu</em></a>
+    <a href="./peta.html" class="text-white px-4 py-2"><em>Peta</em></a>
+    <a href="./saran.html" class="text-white px-4 py-2"><em>Saran</em></a>
+    <a href="./detail.html" class="text-white px-4 py-2"><em>Detail</em></a>
     <br />
     <br />
-    <br>
-    <br>
-    <br>
+    <br />
 
     <div class="social-icons flex justify-center mt-4">
       <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
@@ -144,17 +159,16 @@
   </div>
 
   <!-- Navigasi -->
-  <nav style="background-color: rgb(153, 102, 51)" class="shadow mb-10 w-full justify-center fixed top-0 z-10">
+  <nav style="background-color: rgb(102, 51, 0)" class="shadow mb-10 w-full justify-center fixed top-0 z-10">
     <div class="w-full mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="#" class="text-2xl font-semibold text-white"><em>Kopita
-          <span style="color: rgb(75, 51, 27)">Coffea.</em></span></a>
+      <a href="#" class="text-2xl font-semibold text-white"><em>Kopita <span
+            style="color: rgb(153, 78, 2)">Coffea.</span></em></a>
       <div class="hidden md:flex">
         <a href="./" class="text-white hover:text-gray-800 mx-2"><em>Beranda</em></a>
-        <a href="#menu" class="mx-2 text-white hover:text-gray-800"><em>Menu</em></a>
-        <a href="#peta" class="mx-2 text-white hover:text-gray-800"><em>Peta</em></a>
-        <a href="#saran" class="mx-2 text-white hover:text-gray-800"><em>Saran</em></a>
-        <a href="#kontak" class="mx-2 text-white hover:text-gray-800"><em>Kontak</em></a>
-        <a href="#detail" class="mx-2 text-white hover:text-gray-800"><em>Detail</em></a>
+        <a href="./menu.html" class="mx-2 text-white hover:text-gray-800"><em>Menu</em></a>
+        <a href="./peta.html" class="mx-2 text-white hover:text-gray-800"><em>Peta</em></a>
+        <a href="./saran.html" class="mx-2 text-white hover:text-gray-800"><em>Saran</em></a>
+        <a href="./detail.html" class="mx-2 text-white hover:text-gray-800"><em>Detail</em></a>
       </div>
       <div class="md:hidden">
         <button id="sidebar-toggle" class="text-white focus:outline-none">
@@ -165,156 +179,25 @@
       </div>
     </div>
   </nav>
-  <br><br><br>
-  <!-- Bagian About -->
-  <div id="about" class="about-section mb-8 text-white">
-    <h2 class="text-3xl font-bold text-center mb-4">
+  <div class="content">
+    <h2 class="text-3xl font-bold mb-4">
       Selamat Datang Di <em>Kopita
-        <span style="color: rgb(75, 51, 27)">Coffea.</em>
+        <span style="color: rgb(153, 78, 2)">Coffea.</em>
     </h2>
-    <p class="text-lg text-white text-center">
+    <p class="text-lg">
       Kopita Coffea adalah kedai kopi yang berlokasi di Jl. Kemiri Nomor 21A,
       Benteng, Kec. Benteng, Sulawesi Selatan. Kami menyediakan berbagai macam
       kopi lokal yang disajikan dengan kualitas terbaik dan suasana yang
       nyaman. Dengan pelayanan ramah dan suasana yang hangat, kami berharap
       dapat menjadi tempat favorit Anda untuk menikmati kopi.
     </p>
-    <div class="flex justify-center w-full my-4">
-      <img src="./kopita.jpg" style="width: 92%" class="max-w-full h-auto" alt="suasana kopita" />
-    </div>
-    <p id="menu" class="text-lg text-white text-center mt-4">
+    <p class="text-lg mt-4">
       Kami juga mengadakan berbagai acara dan workshop untuk meningkatkan
       pengalaman para pelanggan kami dalam menikmati kopi dan belajar lebih
       banyak tentang dunia kopi.
     </p>
   </div>
-
-  <!-- Konten Utama -->
-  <h1 class="text-3xl text-white font-bold text-center">
-    Daftar Menu
-  </h1>
-  <br>
-  <div class="w-full mx-auto px-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      <div style="background-color: rgb(153, 102, 51);" class="menu-card rounded-md shadow-md p-4">
-        <h1 class="text-xl text-center text-white font-bold mb-2">Coffe</h1>
-        <ul class="text-white text-center">
-          <li class="mb-2"><em>Kopi Susu: 10k</em></li>
-          <li class="mb-2"><em>Selayar Island Coffee: 15k</em></li>
-          <li class="mb-2"><em>Vietnam Drip Coffee: 15k</em></li>
-          <li class="mb-2"><em>Cappuccino: 15k</em></li>
-          <li class="mb-2"><em>Aeropress Coffee: 15k</em></li>
-          <li class="mb-2"><em>Espresso Coffee: 15k</em></li>
-          <li class="mb-2"><em>Americano Coffee: 15k</em></li>
-          <li class="mb-2"><em>French Press Coffee: 20k</em></li>
-          <li class="mb-2"><em>Hario V60 Coffee (2 Cup): 20k</em></li>
-          <li class="mb-2"><em>Syphon Coffee (2 Cup): 20k</em></li>
-        </ul>
-      </div>
-      <div style="background-color: rgb(153, 102, 51);" class="menu-card rounded-md shadow-md p-4">
-        <h1 class="text-xl text-center text-white font-bold mb-2">Juice</h1>
-        <ul class="text-white text-center">
-          <li class="mb-2"><em>Orange Juice: 10k</em></li>
-          <li class="mb-2"><em>Mango Juice: 10k</em></li>
-          <li class="mb-2"><em>Watermelon Juice: 10k</em></li>
-          <li class="mb-2"><em>Pineapple Juice: 10k</em></li>
-          <li class="mb-2"><em>Strawberry Juice: 10k</em></li>
-        </ul>
-      </div>
-      <div style="background-color: rgb(153, 102, 51);" class="menu-card rounded-md shadow-md p-4">
-        <h1 class="text-xl text-center text-white font-bold mb-2">Food</h1>
-        <ul class="text-white text-center">
-          <li class="mb-2"><em>Nasi Goreng: 15k</em></li>
-          <li class="mb-2"><em>Mie Goreng: 15k</em></li>
-          <li class="mb-2"><em>Bakso: 15k</em></li>
-          <li class="mb-2"><em>Siomay: 15k</em></li>
-          <li class="mb-2"><em>Gado-Gado: 15k</em></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <br>
-  <!-- Konten Utama -->
-  <div class="mb-2">
-    <div style="background-color: rgb(153, 102, 51);"
-      class="w-full mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-gray-300 rounded-lg p-4 bg-white">
-        <h1 id="peta" class="text-center text-2xl font-bold mb-4">Peta</h1>
-        <div id="map" class="w-full h-96 md:h-full rounded-lg"></div>
-      </div>
-
-      <div class="bg-gray-300 shadow rounded-lg p-6 flex flex-col h-full">
-        <h1 id="saran" class="text-center text-2xl font-bold mb-4">Saran</h1>
-        <p class="text-center">Berikan Saran Untuk Kami !!</p>
-        <form id="contact-form" class="flex-grow">
-          <div class="mb-4">
-            <label class="block text-gray-700 h-40 text-sm font-bold mb-2" for="message"></label>
-            <textarea id="message"
-              class="bg-gray-200 appearance-none border rounded w-full h-40 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              required></textarea>
-          </div>
-          <div class="mb-0">
-            <div id="loading" class="hidden text-center">
-              <svg class="animate-spin h-5 w-5 text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-              </svg>
-              <p id="loading-text" class="text-gray-700">Mengirim...</p>
-            </div>
-            <button id="submit-button" type="submit" style="background-color: rgb(153, 102, 51); transition: 0.5s"
-              class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:opacity-80">
-              Kirim
-            </button>
-            <div id="checkmark" class="hidden text-center mt-2">
-              <svg class="h-5 w-5 text-green-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-width="2" d="M5 12l5 5L20 7" />
-              </svg>
-              <p class="text-green-600">Terkirim</p>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-  <br>
-  <!-- Bagian Detail -->
-  <h1 id="detail" class="text-3xl text-white font-bold text-center">
-    Detail
-  </h1>
-  <br>
-  <div style="background-color: rgb(153, 102, 51);"
-    class=" w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
-    <h2 class="text-2xl text-center text-white font-bold mb-2">Jam Buka</h2>
-    <ul class="mb-4 text-center text-white">
-      <li>Senin: 08.00 - 00.00</li>
-      <li>Selasa: 08.00 - 00.00</li>
-      <li>Rabu: 08.00 - 00.00</li>
-      <li>Kamis: 08.00 - 00.00</li>
-      <li>Jumat: 08.00 - 02.00</li>
-      <li>Sabtu: 08.00 - 02.00</li>
-      <li>Minggu: 08.00 - 00.00</li>
-    </ul>
-    <h2 id="kontak" class="text-2xl text-center text-white font-bold mb-2">Kontak Kami</h2>
-    <p class="mb-4 text-center text-white">
-      Jika Anda memiliki pertanyaan atau ingin melakukan reservasi, jangan
-      ragu untuk menghubungi kami melalui:
-    </p>
-    <p class="text-center text-white"><strong>Telepon:</strong> 0858-2769-6334</p>
-    <h2 class="text-2xl text-center text-white font-bold mb-2">Lokasi</h2>
-    <p class="mb-4 text-center text-white">
-      Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi
-      Selatan 92812. Silakan kunjungi kami untuk menikmati kopi terbaik di
-      daerah ini!
-    </p>
-  </div>
-  <br>
-  <!-- Bagian Footer -->
-
-  <footer style="background: rgb(153, 102, 51)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+  <footer style="background: rgb(102, 51, 0)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
     <div class="container mx-auto text-center w-full">
       <div class="social-icons flex justify-center mt-4">
         <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
@@ -332,136 +215,7 @@
       </p>
     </div>
   </footer>
-
-  <!-- Skrip -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
   <script>
-    document.getElementById('contact-form').addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      // Tampilkan spinner loading
-      const loading = document.getElementById('loading');
-      const loadingText = document.getElementById('loading-text');
-      const submitButton = document.getElementById('submit-button');
-      const checkmark = document.getElementById('checkmark');
-
-      loading.classList.remove('hidden');
-      submitButton.classList.add('hidden'); // Sembunyikan tombol kirim
-
-      // Ambil nilai pesan dari textarea
-      const message = document.getElementById('message').value;
-
-      // Kirim data ke EmailJS
-      emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
-        message: message,
-      })
-        .then(function (response) {
-          console.log('SUCCESS!', response.status, response.text);
-          // Ubah teks menjadi "Terkirim"
-          loadingText.innerText = 'Terkirim';
-        }, function (error) {
-          console.log('FAILED...', error);
-          alert('Pesan gagal terkirim.');
-          // Tampilkan kembali tombol kirim jika gagal
-          submitButton.classList.remove('hidden');
-          loading.classList.add('hidden');
-        })
-        .finally(() => {
-          // Tampilkan centang setelah beberapa detik
-          setTimeout(() => {
-            loading.classList.add('hidden'); // Sembunyikan spinner
-            checkmark.classList.remove('hidden'); // Tampilkan centang
-            // Reset textarea
-            document.getElementById('message').value = '';
-            // Kembalikan teks ke "Mengirim..." setelah reset
-            loadingText.innerText = 'Mengirim...';
-            // Tampilkan tombol kirim kembali setelah beberapa detik
-            setTimeout(() => {
-              checkmark.classList.add('hidden');
-              submitButton.classList.remove('hidden');
-            }, 2000);
-          }, 2000);
-        });
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-      const map = L.map("map").setView([-6.115219, 120.462126], 18);
-
-      const umkmData = {
-        name: "Kopita Coffea",
-        rating: "4.2",
-        reviews: 45,
-        category: "Kedai Kopi",
-        buka: "Buka · Tutup pukul 02.00 🔻",
-        alamat:
-          "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
-        phone: "0858-2769-6334",
-        coords: [-6.115219, 120.462126],
-        imageUrl: "./kopita.jpg",
-        hours: {
-          Senin: "08.00–00.00",
-          Selasa: "08.00–00.00",
-          Rabu: "08.00–00.00",
-          Kamis: "08.00–00.00",
-          Jumat: "08.00–02.00",
-          Sabtu: "08.00–02.00",
-          Minggu: "08.00–00.00",
-        },
-      };
-
-      const marker = L.marker(umkmData.coords).addTo(map);
-
-      // Menambahkan tooltip permanen pada marker
-      marker.bindTooltip(umkmData.name, {
-        permanent: true,
-        direction: "top",
-        className: "marker-tooltip",
-      });
-
-      marker.bindPopup(`
-                <div class="popup-container">
-                    <div class="popup-header">${umkmData.name}</div>
-                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
-                    <div class="popup-category">${umkmData.category}</div>
-                    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
-                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
-                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
-                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
-                </div>
-            `);
-
-      fetch("./jalanBentengAnjay.geojson")
-        .then((response) => response.json())
-        .then((geojsonData) => {
-          L.geoJSON(geojsonData, {
-            style: {
-              color: "#f0f0f0",
-              weight: 3,
-              opacity: 1,
-            },
-          }).addTo(map);
-        })
-        .catch((error) =>
-          console.error("Error loading jalan GeoJSON:", error)
-        );
-
-      fetch("./kecamatanBenteng.geojson")
-        .then((response) => response.json())
-        .then((geojsonData) => {
-          L.geoJSON(geojsonData, {
-            style: {
-              color: "#333",
-              weight: 1.5,
-              opacity: 0.8,
-              fillColor: "#333",
-              fillOpacity: 0.1,
-            },
-          }).addTo(map);
-        })
-        .catch((error) =>
-          console.error("Error loading kecamatanBenteng GeoJSON:", error)
-        );
-    });
     // Ambil elemen sidebar dan tombol
     const sidebar = document.getElementById("sidebar");
     const sidebarToggle = document.getElementById("sidebar-toggle");
@@ -485,30 +239,6 @@
       link.addEventListener("click", function () {
         sidebar.style.left = "-250px";
       });
-    });
-
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
-  <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
-  <script>
-    (function () {
-      emailjs.init("Bijk8UDVwatT5EPPK");
-    })();
-
-    document.getElementById('contact-form').addEventListener('submit', function (event) {
-      event.preventDefault();
-      // Ambil nilai pesan dari textarea
-      const message = document.getElementById('message').value;
-
-      // Kirim data ke EmailJS
-      emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
-        message: message,
-      })
-        .then(function (response) {
-        }, function (error) {
-          console.log('FAILED...', error);
-          alert('Pesan gagal terkirim.');
-        });
     });
   </script>
 </body>
