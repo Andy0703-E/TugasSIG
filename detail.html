@@ -11,6 +11,23 @@
         body {
             background-color: #f7f7f7;
             color: #333;
+            overflow: hidden;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+
+        footer {
+            background: rgb(102, 51, 0);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
         }
 
         .sidebar {
@@ -36,17 +53,14 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Footer */
-        footer {
-            background: rgb(102, 51, 0);
-            color: white;
-            text-align: center;
-            padding: 10px 0;
+        .container {
+            flex: 1;
         }
     </style>
 </head>
 
-<body class="bg-gray-900">
+<body
+    style="background: url(./kopi.jpeg); background-position: center; background-repeat: repeat; background-size: cover;">
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
@@ -58,7 +72,6 @@
         <br />
         <br />
         <br />
-
         <div class="social-icons flex justify-center mt-4">
             <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
                 <i class="fab fa-github fa-lg"></i>
@@ -102,35 +115,28 @@
         </div>
     </nav>
     <br><br><br>
-    <!-- Bagian Detail -->
-    <div class="bg-gray-900 w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
-        <h1 class="text-center text-4xl text-white">Detail Kopita Coffea</h1>
-        <br>
-        <h2 class="text-2xl text-center text-white font-bold mb-2">Jam Buka</h2>
-        <ul class="mb-4 text-center text-white">
-            <li>Senin: 08.00 - 00.00</li>
-            <li>Selasa: 08.00 - 00.00</li>
-            <li>Rabu: 08.00 - 00.00</li>
-            <li>Kamis: 08.00 - 00.00</li>
-            <li>Jumat: 08.00 - 02.00</li>
-            <li>Sabtu: 08.00 - 02.00</li>
-            <li>Minggu: 08.00 - 00.00</li>
-        </ul>
-        <h2 id="kontak" class="text-2xl text-center text-white font-bold mb-2">Kontak Kami</h2>
-        <p class="mb-4 text-center text-white">
-            Jika Anda memiliki pertanyaan atau ingin melakukan reservasi, jangan
-            ragu untuk menghubungi kami melalui:
-        </p>
-        <p class="text-center text-white"><strong>Telepon:</strong> 0858-2769-6334</p>
-        <h2 class="text-2xl text-center text-white font-bold mb-2">Lokasi</h2>
-        <p class="mb-4 text-center text-white">
-            Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi
-            Selatan 92812. Silakan kunjungi kami untuk menikmati kopi terbaik di
-            daerah ini!
-        </p>
+    <div class="container mx-auto px-2 py-4">
+        <div class="text-white rounded-lg shadow-lg p-8 w-full max-w-3xl mx-auto mb-10">
+            <h2 class="text-4xl text-center font-semibold mb-3">Jam Buka</h2>
+            <ul style="color: rgb(153, 78, 2);" class="text-center space-y-2 text-lg">
+                <li>Senin: 08.00 - 00.00</li>
+                <li>Selasa: 08.00 - 00.00</li>
+                <li>Rabu: 08.00 - 00.00</li>
+                <li>Kamis: 08.00 - 00.00</li>
+                <li>Jumat: 08.00 - 02.00</li>
+                <li>Sabtu: 08.00 - 02.00</li>
+                <li>Minggu: 08.00 - 00.00</li>
+            </ul>
+            <p style="color: rgb(153, 78, 2);" class="text-center font-semibold text-lg">
+                Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812. Silakan
+                kunjungi kami untuk menikmati kopi terbaik di daerah ini!
+            </p>
+            <p style="color: rgb(153, 78, 2);" class="text-center text-lg font-semiboldfont-medium">
+                <strong class="font-semibold">Telepon:</strong>
+                0858-2769-6334
+            </p>
+        </div>
     </div>
-    <br>
-    <br>
     <footer style="background: rgb(102, 51, 0)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
         <div class="container mx-auto text-center w-full">
             <div class="social-icons flex justify-center mt-4">
