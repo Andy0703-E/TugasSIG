@@ -38,10 +38,6 @@
             padding: 10px 0;
         }
 
-        .social-icons a {
-            margin: 0 8px;
-        }
-
         .sidebar {
             width: 250px;
             position: fixed;
@@ -67,6 +63,34 @@
 
         .sidebar-toggle {
             cursor: pointer;
+        }
+
+
+        .popup-container {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .popup-header {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .popup-rating,
+        .popup-category,
+        .popup-address,
+        .popup-hours,
+        .popup-contact {
+            margin-top: 5px;
+        }
+
+        .popup-image {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
         }
 
         #map {
@@ -133,101 +157,99 @@
     </nav>
     <br>
     <div class="w-full mx-auto flex-1 mt-16">
-        <h1 class="text-center font-semibold text-4xl text-white">Peta</h1>
-        <br>
         <!-- Bagian Peta -->
-        <div id="peta" class="mb-0">
-            <div style="background-color: rgb(102, 51, 0);" class="w-full mx-auto px-0 py-0">
-
-                <div class="bg-gray-300 rounded-lg p-0 w-full mx-auto" data-aos="fade-up" data-aos-duration="1000"
-                    data-aos-delay="200">
-                    <div id="map" class="w-full h-full rounded-lg"></div>
+        <div class="container mx-auto py-6">
+            <div id="peta" class="mb-6">
+                <div style="background: #663300 ;" class=" w-full rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gray-100 p-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div id="map" class="w-full h-80 rounded-lg"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <footer style="background: rgb(102, 51, 0)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
-        <div class="container mx-auto text-center w-full">
-            <div class="social-icons flex justify-center mt-4">
-                <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
-                    <i class="fab fa-github fa-lg"></i>
-                </a>
-                <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
-                    <i class="fab fa-facebook fa-lg"></i>
-                </a>
-                <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
-                    <i class="fab fa-instagram fa-lg"></i>
-                </a>
+        <footer style="background: rgb(102, 51, 0)"
+            class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+            <div class="container mx-auto text-center w-full">
+                <div class="social-icons flex justify-center mt-4">
+                    <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                        <i class="fab fa-facebook fa-lg"></i>
+                    </a>
+                    <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                        <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                </div>
+                <p class="mb-2 font-semibold">
+                    <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+                </p>
             </div>
-            <p class="mb-2 font-semibold">
-                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
-            </p>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script>    // Ambil elemen sidebar dan tombol
-        const sidebar = document.getElementById("sidebar");
-        const sidebarToggle = document.getElementById("sidebar-toggle");
-        const closeSidebar = document.getElementById("close-sidebar");
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script>    // Ambil elemen sidebar dan tombol
+            const sidebar = document.getElementById("sidebar");
+            const sidebarToggle = document.getElementById("sidebar-toggle");
+            const closeSidebar = document.getElementById("close-sidebar");
 
-        // Fungsi untuk membuka sidebar
-        sidebarToggle.addEventListener("click", function () {
-            sidebar.style.left = "0px";
-        });
+            // Fungsi untuk membuka sidebar
+            sidebarToggle.addEventListener("click", function () {
+                sidebar.style.left = "0px";
+            });
 
-        // Fungsi untuk menutup sidebar
-        closeSidebar.addEventListener("click", function () {
-            sidebar.style.left = "-250px";
-        });
-
-        // Ambil semua tautan di sidebar
-        const sidebarLinks = document.querySelectorAll(".sidebar a");
-
-        // Tambahkan event listener untuk setiap tautan
-        sidebarLinks.forEach((link) => {
-            link.addEventListener("click", function () {
+            // Fungsi untuk menutup sidebar
+            closeSidebar.addEventListener("click", function () {
                 sidebar.style.left = "-250px";
             });
-        });
-        document.addEventListener("DOMContentLoaded", function () {
-            const map = L.map("map").setView([-6.114443, 120.462397], 18);
 
-            const umkmData = {
-                name: "Kopita Coffea",
-                rating: "4.2",
-                reviews: 45,
-                category: "Kedai Kopi",
-                buka: "Buka · Tutup pukul 02.00 🔻",
-                alamat: "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
-                phone: "0858-2769-6334",
-                coords: [-6.115219, 120.462126],
-                imageUrl: "./kopita.jpg",
-                hours: {
-                    Senin: "08.00–00.00",
-                    Selasa: "08.00–00.00",
-                    Rabu: "08.00–00.00",
-                    Kamis: "08.00–00.00",
-                    Jumat: "08.00–02.00",
-                    Sabtu: "08.00–02. 00",
-                    Minggu: "08.00–00.00",
-                },
-            };
+            // Ambil semua tautan di sidebar
+            const sidebarLinks = document.querySelectorAll(".sidebar a");
 
-            const marker = L.marker(umkmData.coords).addTo(map);
-
-            // Menambahkan tooltip permanen pada marker
-            marker.bindTooltip(umkmData.name, {
-                permanent: true,
-                direction: "top",
-                className: "marker-tooltip",
+            // Tambahkan event listener untuk setiap tautan
+            sidebarLinks.forEach((link) => {
+                link.addEventListener("click", function () {
+                    sidebar.style.left = "-250px";
+                });
             });
+            document.addEventListener("DOMContentLoaded", function () {
+                const map = L.map("map").setView([-6.114443, 120.462397], 18);
 
-            marker.bindPopup(`
+                const umkmData = {
+                    name: "Kopita Coffea",
+                    rating: "4.2",
+                    reviews: 45,
+                    category: "Kedai Kopi",
+                    buka: "Buka · Tutup pukul 02.00 🔻",
+                    alamat: "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
+                    phone: "0858-2769-6334",
+                    coords: [-6.115219, 120.462126],
+                    imageUrl: "./kopita.jpg",
+                    hours: {
+                        Senin: "08.00–00.00",
+                        Selasa: "08.00–00.00",
+                        Rabu: "08.00–00.00",
+                        Kamis: "08.00–00.00",
+                        Jumat: "08.00–02.00",
+                        Sabtu: "08.00–02. 00",
+                        Minggu: "08.00–00.00",
+                    },
+                };
+
+                const marker = L.marker(umkmData.coords).addTo(map);
+
+                // Menambahkan tooltip permanen pada marker
+                marker.bindTooltip(umkmData.name, {
+                    permanent: true,
+                    direction: "top",
+                    className: "marker-tooltip",
+                });
+
+                marker.bindPopup(`
                 <div class="popup-container">
                     <div class="popup-header">${umkmData.name}</div>
                     <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
@@ -239,39 +261,39 @@
                 </div>
             `);
 
-            fetch("./jalanBentengAnjay.geojson")
-                .then((response) => response.json())
-                .then((geojsonData) => {
-                    L.geoJSON(geojsonData, {
-                        style: {
-                            color: "#f0f0f0",
-                            weight: 3,
-                            opacity: 1,
-                        },
-                    }).addTo(map);
-                })
-                .catch((error) =>
-                    console.error("Error loading jalan GeoJSON:", error)
-                );
+                fetch("./jalanBentengAnjay.geojson")
+                    .then((response) => response.json())
+                    .then((geojsonData) => {
+                        L.geoJSON(geojsonData, {
+                            style: {
+                                color: "#f0f0f0",
+                                weight: 3,
+                                opacity: 1,
+                            },
+                        }).addTo(map);
+                    })
+                    .catch((error) =>
+                        console.error("Error loading jalan GeoJSON:", error)
+                    );
 
-            fetch("./kecamatanBenteng.geojson")
-                .then((response) => response.json())
-                .then((geojsonData) => {
-                    L.geoJSON(geojsonData, {
-                        style: {
-                            color: "#333",
-                            weight: 1.5,
-                            opacity: 0.8,
-                            fillColor: "#333",
-                            fillOpacity: 0.1,
-                        },
-                    }).addTo(map);
-                })
-                .catch((error) =>
-                    console.error("Error loading kecamatanBenteng GeoJSON:", error)
-                );
-        });
-    </script>
+                fetch("./kecamatanBenteng.geojson")
+                    .then((response) => response.json())
+                    .then((geojsonData) => {
+                        L.geoJSON(geojsonData, {
+                            style: {
+                                color: "#333",
+                                weight: 1.5,
+                                opacity: 0.8,
+                                fillColor: "#333",
+                                fillOpacity: 0.1,
+                            },
+                        }).addTo(map);
+                    })
+                    .catch((error) =>
+                        console.error("Error loading kecamatanBenteng GeoJSON:", error)
+                    );
+            });
+        </script>
 </body>
 
 </html>
