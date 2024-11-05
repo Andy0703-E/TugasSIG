@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopita Coffea - Saran</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        /* Gaya umum */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a202c;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            background-color: rgb(102, 51, 0);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Form Saran */
+        #saran {
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            /* Memastikan form mengambil sisa ruang */
+        }
+
+        /* Tombol Kirim */
+        #submit-button {
+            background-color: rgb(102, 51, 0);
+            transition: background-color 0.3s;
+        }
+
+        #submit-button:hover {
+            background-color: rgb(153, 78, 2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgb(102, 51, 0);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
+        <a href="./" class="text-white px-4 py-2"><em>Beranda</em></a>
+        <a href="./menu.html" class="text-white px-4 py-2"><em>Menu</em></a>
+        <a href="./peta.html" class="text-white px-4 py-2"><em>Peta</em></a>
+        <a href="./saran.html" class="text-white px-4 py-2"><em>Saran</em></a>
+        <a href="./detail.html" class="text-white px-4 py-2"><em>Detail</em></a>
+        <br />
+        <br />
+        <br />
+
+        <div class="social-icons flex justify-center mt-4">
+            <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                <i class="fab fa-github fa-lg"></i>
+            </a>
+            <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook fa-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-lg"></i>
+            </a>
+        </div>
+
+        <div class="footer mt-auto">
+            <p class="mb-2 text-white text-center font-semibold">
+                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigasi -->
+    <nav style="background-color: rgb(102, 51, 0)" class="shadow mb-10 w-full justify-center fixed top-0 z-10">
+        <div class="w-full mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-semibold text-white"><em>Kopita <span
+                        style="color: rgb(153, 78, 2)">Coffea.</span></em></a>
+            <div class="hidden md:flex">
+                <a href="./" class="text-white hover:text-gray-800 mx-2"><em>Beranda</em></a>
+                <a href="./menu.html" class="mx-2 text-white hover:text-gray-800"><em>Menu</em></a>
+                <a href="./peta.html" class="mx-2 text-white hover:text-gray-800"><em>Peta</em></a>
+                <a href="./saran.html" class="mx-2 text-white hover:text-gray-800"><em>Saran</em></a>
+                <a href="./detail.html" class="mx-2 text-white hover:text-gray-800"><em>Detail</em></a>
+            </div>
+            <div class="md:hidden">
+                <button id="sidebar-toggle" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="saran" class="bg-gray-300 shadow rounded-lg p-4 flex flex-col w-4/5 mx-auto" data-aos="fade-up"
+        data-aos-duration="1000" data-aos-delay="200">
+        <p class="text-center">Berikan Saran Untuk Kami !!</p>
+
+        <form id="contact-form" class="flex-grow flex flex-col justify-between">
+            <div class="mb-3">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="message"></label>
+                <textarea id="message"
+                    class="bg-gray-300 appearance-none border rounded w-full h-32 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required></textarea>
+            </div>
+
+            <!-- Instructions below the textarea -->
+            <p class="text-gray-600 text-center text-sm mb-2">Silakan masukkan saran Anda di atas dan tekan tombol
+                "Kirim" untuk
+                mengirim.</p>
+
+            <!-- Bagian loading -->
+            <div id="loading" class="hidden text-center mb-3">
+                <svg class="animate-spin h-5 w-5 text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                    </circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <p id="loading-text" class="text-gray-700">Mengirim...</p>
+            </div>
+
+            <!-- Tombol Kirim -->
+            <button id="submit-button" type="submit" style="background-color: rgb(102, 51, 0); transition: 0.5s"
+                class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:opacity-80">
+                Kirim
+            </button>
+
+            <!-- Checkmark konfirmasi -->
+            <div id="checkmark" class="hidden text-center mt-2">
+                <svg class="h-5 w-5 text-green-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-width="2" d="M5 12l5 5L20 7" />
+                </svg>
+                <p class="text-green-600">Terkirim</p>
+            </div>
+        </form>
+    </div>
+
+    <footer class="text-white w-full py-2 mt-8">
+        <div class="container mx-auto text-center w-full">
+            <div class="social-icons flex justify-center mt-4">
+                <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+                <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-facebook fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
+            <p class="mb-2 font-semibold">
+                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+            </p>
+        </div>
+    </footer>
+    <!-- Skrip -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Tampilkan spinner loading
+            const loading = document.getElementById('loading');
+            const loadingText = document.getElementById('loading-text');
+            const submitButton = document.getElementById('submit-button');
+            const checkmark = document.getElementById('checkmark');
+
+            loading.classList.remove('hidden');
+            submitButton.classList.add('hidden'); // Sembunyikan tombol kirim
+
+            // Ambil nilai pesan dari textarea
+            const message = document.getElementById('message').value;
+
+            // Kirim data ke EmailJS
+            emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
+                message: message,
+            })
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    // Ubah teks menjadi "Terkirim"
+                    loadingText.innerText = 'Terkirim';
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    alert('Pesan gagal terkirim.');
+                    // Tampilkan kembali tombol kirim jika gagal
+                    submitButton.classList.remove('hidden');
+                    loading.classList.add('hidden');
+                })
+                .finally(() => {
+                    // Tampilkan centang setelah beberapa detik
+                    setTimeout(() => {
+                        loading.classList.add('hidden'); // Sembunyikan spinner
+                        checkmark.classList.remove('hidden'); // Tampilkan centang
+                        // Reset textarea
+                        document.getElementById('message').value = '';
+                        // Kembalikan teks ke "Mengirim..." setelah reset
+                        loadingText.innerText = 'Mengirim...';
+                        // Tampilkan tombol kirim kembali setelah beberapa detik
+                        setTimeout(() => {
+                            checkmark.classList.add('hidden');
+                            submitButton.classList.remove('hidden');
+                        }, 2000);
+                    }, 2000);
+                });
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            const map = L.map("map").setView([-6.115219, 120.462126], 18);
+
+            const umkmData = {
+                name: "Kopita Coffea",
+                rating: "4.2",
+                reviews: 45,
+                category: "Kedai Kopi",
+                buka: "Buka · Tutup pukul 02.00 🔻",
+                alamat:
+                    "Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi Selatan 92812",
+                phone: "0858-2769-6334",
+                coords: [-6.115219, 120.462126],
+                imageUrl: "./kopita.jpg",
+                hours: {
+                    Senin: "08.00–00.00",
+                    Selasa: "08.00–00.00",
+                    Rabu: "08.00–00.00",
+                    Kamis: "08.00–00.00",
+                    Jumat: "08.00–02.00",
+                    Sabtu: "08.00–02.00",
+                    Minggu: "08.00–00.00",
+                },
+            };
+
+            const marker = L.marker(umkmData.coords).addTo(map);
+
+            // Menambahkan tooltip permanen pada marker
+            marker.bindTooltip(umkmData.name, {
+                permanent: true,
+                direction: "top",
+                className: "marker-tooltip",
+            });
+
+            marker.bindPopup(`
+                <div class="popup-container">
+                    <div class="popup-header">${umkmData.name}</div>
+                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
+                    <div class="popup-category">${umkmData.category}</div>
+                    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+                </div>
+            `);
+
+            fetch("./jalanBentengAnjay.geojson")
+                .then((response) => response.json())
+                .then((geojsonData) => {
+                    L.geoJSON(geojsonData, {
+                        style: {
+                            color: "#f0f0f0",
+                            weight: 3,
+                            opacity: 1,
+                        },
+                    }).addTo(map);
+                })
+                .catch((error) =>
+                    console.error("Error loading jalan GeoJSON:", error)
+                );
+
+            fetch("./kecamatanBenteng.geojson")
+                .then((response) => response.json())
+                .then((geojsonData) => {
+                    L.geoJSON(geojsonData, {
+                        style: {
+                            color: "#333",
+                            weight: 1.5,
+                            opacity: 0.8,
+                            fillColor: "#333",
+                            fillOpacity: 0.1,
+                        },
+                    }).addTo(map);
+                })
+                .catch((error) =>
+                    console.error("Error loading kecamatanBenteng GeoJSON:", error)
+                );
+        });
+        // Ambil elemen sidebar dan tombol
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebar-toggle");
+        const closeSidebar = document.getElementById("close-sidebar");
+
+        // Fungsi untuk membuka sidebar
+        sidebarToggle.addEventListener("click", function () {
+            sidebar.style.left = "0px";
+        });
+
+        // Fungsi untuk menutup sidebar
+        closeSidebar.addEventListener("click", function () {
+            sidebar.style.left = "-250px";
+        });
+
+        // Ambil semua tautan di sidebar
+        const sidebarLinks = document.querySelectorAll(".sidebar");
+
+        // Tambahkan event listener untuk setiap tautan
+        sidebarLinks.forEach((link) => {
+            link.addEventListener("click", function () {
+                sidebar.style.left = "-250px";
+            });
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("Bijk8UDVwatT5EPPK");
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Ambil nilai pesan dari textarea
+            const message = document.getElementById('message').value;
+
+            // Kirim data ke EmailJS
+            emailjs.send('service_b8bgkak', 'template_yo6nm8d', {
+                message: message,
+            })
+                .then(function (response) {
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    alert('Pesan gagal terkirim.');
+                });
+        });
+    </script>
+</body>
+
+</html>
