@@ -130,39 +130,29 @@
 
     <div id="saran" class="bg-gray-300 shadow rounded-lg p-4 flex flex-col w-4/5 mx-auto" data-aos="fade-up"
         data-aos-duration="1000" data-aos-delay="200">
-        <p class="text-center">Berikan Saran Untuk Kami !!</p>
+        <p class="text-center text-lg font-bold">Berikan Saran Untuk Kami !!</p>
 
         <form id="contact-form" class="flex-grow flex flex-col justify-between">
             <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="message"></label>
                 <textarea id="message"
-                    class="bg-gray-300 appearance-none border rounded w-full h-32 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="bg-white shadow appearance-none border rounded w-full h-32 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     required></textarea>
             </div>
 
-            <!-- Instructions below the textarea -->
-            <p class="text-gray-600 text-center text-sm mb-2">Silakan masukkan saran Anda di atas dan tekan tombol
-                "Kirim" untuk
-                mengirim.</p>
-
-            <!-- Bagian loading -->
             <div id="loading" class="hidden text-center mb-3">
                 <svg class="animate-spin h-5 w-5 text-gray-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
-                    </circle>
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                 </svg>
                 <p id="loading-text" class="text-gray-700">Mengirim...</p>
             </div>
 
-            <!-- Tombol Kirim -->
-            <button id="submit-button" type="submit" style="background-color: rgb(102, 51, 0); transition: 0.5s"
+            <button id="submit-button" type="submit"
                 class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full hover:opacity-80">
                 Kirim
             </button>
 
-            <!-- Checkmark konfirmasi -->
             <div id="checkmark" class="hidden text-center mt-2">
                 <svg class="h-5 w-5 text-green-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
