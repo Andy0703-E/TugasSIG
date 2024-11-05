@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Kopita Coffea</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            background-color: rgb(102, 51, 0);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: rgb(102, 51, 0);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
+        <a href="./" class="text-white px-4 py-2"><em>Beranda</em></a>
+        <a href="./menu.html" class="text-white px-4 py-2"><em>Menu</em></a>
+        <a href="./peta.html" class="text-white px-4 py-2"><em>Peta</em></a>
+        <a href="./saran.html" class="text-white px-4 py-2"><em>Saran</em></a>
+        <a href="./detail.html" class="text-white px-4 py-2"><em>Detail</em></a>
+        <br />
+        <br />
+        <br />
+
+        <div class="social-icons flex justify-center mt-4">
+            <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                <i class="fab fa-github fa-lg"></i>
+            </a>
+            <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook fa-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-lg"></i>
+            </a>
+        </div>
+
+        <div class="footer mt-auto">
+            <p class="mb-2 text-white text-center font-semibold">
+                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigasi -->
+    <nav style="background-color: rgb(102, 51, 0)" class="shadow mb-10 w-full justify-center fixed top-0 z-10">
+        <div class="w-full mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-semibold text-white"><em>Kopita <span
+                        style="color: rgb(153, 78, 2)">Coffea.</span></em></a>
+            <div class="hidden md:flex">
+                <a href="./" class="text-white hover:text-gray-800 mx-2"><em>Beranda</em></a>
+                <a href="./menu.html" class="mx-2 text-white hover:text-gray-800"><em>Menu</em></a>
+                <a href="./peta.html" class="mx-2 text-white hover:text-gray-800"><em>Peta</em></a>
+                <a href="./saran.html" class="mx-2 text-white hover:text-gray-800"><em>Saran</em></a>
+                <a href="./detail.html" class="mx-2 text-white hover:text-gray-800"><em>Detail</em></a>
+            </div>
+            <div class="md:hidden">
+                <button id="sidebar-toggle" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <br><br><br>
+    <!-- Bagian Detail -->
+    <div class="bg-gray-900 w-full mx-auto px-4 py-6 bg-white rounded-lg shadow-md mb-10">
+        <h1 class="text-center text-4xl text-white">Detail Kopita Coffea</h1>
+        <br>
+        <h2 class="text-2xl text-center text-white font-bold mb-2">Jam Buka</h2>
+        <ul class="mb-4 text-center text-white">
+            <li>Senin: 08.00 - 00.00</li>
+            <li>Selasa: 08.00 - 00.00</li>
+            <li>Rabu: 08.00 - 00.00</li>
+            <li>Kamis: 08.00 - 00.00</li>
+            <li>Jumat: 08.00 - 02.00</li>
+            <li>Sabtu: 08.00 - 02.00</li>
+            <li>Minggu: 08.00 - 00.00</li>
+        </ul>
+        <h2 id="kontak" class="text-2xl text-center text-white font-bold mb-2">Kontak Kami</h2>
+        <p class="mb-4 text-center text-white">
+            Jika Anda memiliki pertanyaan atau ingin melakukan reservasi, jangan
+            ragu untuk menghubungi kami melalui:
+        </p>
+        <p class="text-center text-white"><strong>Telepon:</strong> 0858-2769-6334</p>
+        <h2 class="text-2xl text-center text-white font-bold mb-2">Lokasi</h2>
+        <p class="mb-4 text-center text-white">
+            Kami berlokasi di Jl. Kemiri Nomor 21A, Benteng, Kec. Benteng, Sulawesi
+            Selatan 92812. Silakan kunjungi kami untuk menikmati kopi terbaik di
+            daerah ini!
+        </p>
+    </div>
+    <br>
+    <br>
+    <footer style="background: rgb(102, 51, 0)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+        <div class="container mx-auto text-center w-full">
+            <div class="social-icons flex justify-center mt-4">
+                <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+                <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-facebook fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
+            <p class="mb-2 font-semibold">
+                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebar-toggle");
+        const closeSidebar = document.getElementById("close-sidebar");
+
+        // Fungsi untuk membuka sidebar
+        sidebarToggle.addEventListener("click", function () {
+            sidebar.style.left = "0px";
+        });
+
+        // Fungsi untuk menutup sidebar
+        closeSidebar.addEventListener("click", function () {
+            sidebar.style.left = "-250px";
+        });
+
+        // Ambil semua tautan di sidebar
+        const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+        // Tambahkan event listener untuk setiap tautan
+        sidebarLinks.forEach((link) => {
+            link.addEventListener("click", function () {
+                sidebar.style.left = "-250px";
+            });
+        });
+    </script>
+</body>
+
+</html>
