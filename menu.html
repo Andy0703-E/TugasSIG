@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>Kopita | Coffea</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #1a202c;
+            overflow: hidden;
+        }
+
+
+        nav {
+            background-color: rgb(102, 51, 0);
+            position: fixed;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .menu-card {
+            background-color: rgb(102, 51, 0);
+        }
+
+        footer {
+            background: rgb(102, 51, 0);
+            color: white;
+            padding: 10px 0;
+        }
+
+        .social-icons a {
+            margin: 0 8px;
+        }
+
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            background-color: rgb(102, 51, 0);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-toggle {
+            cursor: pointer;
+        }
+
+        @media (max-width:676px) {
+            body {
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900">
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
+        <a href="./" class="text-white px-4 py-2"><em>Beranda</em></a>
+        <a href="./menu.html" class="text-white px-4 py-2"><em>Menu</em></a>
+        <a href="./peta.html" class="text-white px-4 py-2"><em>Peta</em></a>
+        <a href="./saran.html" class="text-white px-4 py-2"><em>Saran</em></a>
+        <a href="./detail.html" class="text-white px-4 py-2"><em>Detail</em></a>
+        <br />
+        <br />
+        <br />
+
+        <div class="social-icons flex justify-center mt-4">
+            <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                <i class="fab fa-github fa-lg"></i>
+            </a>
+            <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook fa-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-lg"></i>
+            </a>
+        </div>
+
+        <div class="footer mt-auto">
+            <p class="mb-2 text-white text-center font-semibold">
+                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigasi -->
+    <nav style="background-color: rgb(102, 51, 0)" class="shadow mb-10 w-full justify-center fixed top-0 z-10">
+        <div class="w-full mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-semibold text-white"><em>Kopita <span
+                        style="color: rgb(153, 78, 2)">Coffea.</span></em></a>
+            <div class="hidden md:flex">
+                <a href="./" class="text-white hover:text-gray-800 mx-2"><em>Beranda</em></a>
+                <a href="./menu.html" class="mx-2 text-white hover:text-gray-800"><em>Menu</em></a>
+                <a href="./peta.html" class="mx-2 text-white hover:text-gray-800"><em>Peta</em></a>
+                <a href="./saran.html" class="mx-2 text-white hover:text-gray-800"><em>Saran</em></a>
+                <a href="./detail.html" class="mx-2 text-white hover:text-gray-800"><em>Detail</em></a>
+            </div>
+            <div class="md:hidden">
+                <button id="sidebar-toggle" class="text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class="w-full mx-auto px-4 flex-1 mt-16">
+        <br>
+        <h1 class="text-center font-semibold text-white text-xl">Menu</h1>
+        <br>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="menu-card rounded-md shadow-md p-4" data-aos="fade-right" data-aos-duration="1500">
+                <h1 class=" text-xl text-center text-white font-bold mb-2">Coffe</h1>
+                <ul class="text-white text-center">
+                    <li class="mb-2"><em>Kopi Susu: 10k</em></li>
+                    <li class="mb-2"><em>Selayar Island Coffee: 15k</em></li>
+                    <li class="mb-2"><em>Vietnam Drip Coffee: 15k</em></li>
+                    <li class="mb-2"><em>Cappuccino: 15k</em></li>
+                    <li class="mb-2"><em>Aeropress Coffee: 15k</em></li>
+                    <li class="mb-2"><em>Espresso Coffee: 15k</em></li>
+                    <li class="mb-2"><em>Americano Coffee: 15k</em></li>
+                    <li class="mb-2"><em>French Press Coffee: 20k</em></li>
+                    <li class="mb-2"><em>Hario V60 Coffee (2 Cup): 20k</em></li>
+                    <li class="mb-2"><em>Syphon Coffee (2 Cup): 20k</em></li>
+                </ul>
+            </div>
+            <div class="menu-card rounded-md shadow-md p-4" data-aos="fade-right" data-aos-duration="1500"
+                data-aos-delay="200">
+                <h1 class="text-xl text-center text -white font-bold mb-2">Juice</h1>
+                <ul class="text-white text-center">
+                    <li class="mb-2"><em>Orange Juice: 10k</em></li>
+                    <li class="mb-2"><em>Mango Juice: 10k</em></li>
+                    <li class="mb-2"><em>Watermelon Juice: 10k</em></li>
+                    <li class="mb-2"><em>Pineapple Juice: 10k</em></li>
+                    <li class="mb-2"><em>Strawberry Juice: 10k</em></li>
+                </ul>
+            </div>
+            <div class="menu-card rounded-md shadow-md p-4" data-aos="fade-right" data-aos-duration="1000"
+                data-aos-delay="200">
+                <h1 class="text-xl text-center text-white font-bold mb-2">Food</h1>
+                <ul class="text-white text-center">
+                    <li class="mb-2"><em>Nasi Goreng: 15k</em></li>
+                    <li class="mb-2"><em>Mie Goreng: 15k</em></li>
+                    <li class="mb-2"><em>Bakso: 15k</em></li>
+                    <li class="mb-2"><em>Siomay: 15k</em></li>
+                    <li class="mb-2"><em>Gado-Gado: 15k</em></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer style="background: rgb(102, 51, 0)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+        <div class="container mx-auto text-center w-full">
+            <div class="social-icons flex justify-center mt-4">
+                <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+                <a href="https://www.facebook.com/dadung.dadung.169405" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-facebook fa-lg"></i>
+                </a>
+                <a href="https://www.instagram.com/dadung0703" target="_blank" class="text-white mx-2">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
+            <p class="mb-2 font-semibold">
+                <em>&copy; 2024 Kopita Coffea - Andi Agung Semua hak dilindungi.</em>
+            </p>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script>
+        // Ambil elemen sidebar dan tombol
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebar-toggle");
+        const closeSidebar = document.getElementById("close-sidebar");
+
+        // Fungsi untuk membuka sidebar
+        sidebarToggle.addEventListener("click", function () {
+            sidebar.style.left = "0px";
+        });
+
+        // Fungsi untuk menutup sidebar
+        closeSidebar.addEventListener("click", function () {
+            sidebar.style.left = "-250px";
+        });
+
+        // Ambil semua tautan di sidebar
+        const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+        // Tambahkan event listener untuk setiap tautan
+        sidebarLinks.forEach((link) => {
+            link.addEventListener("click", function () {
+                sidebar.style.left = "-250px";
+            });
+        });
+    </script>
+</body>
+
+</html>
