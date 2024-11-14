@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <title>Kopita Coffea</title>
     <style>
         body {
@@ -79,7 +80,7 @@
 
 <body
     style="background: url(./kopi.jpeg); background-position: center; background-repeat: repeat; background-size: cover;">
-    <!-- Sidebar -->
+  <!-- Sidebar -->
     <div id="sidebar" class="sidebar" data-aos="fade-right" data-aos-duration="600">
         <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
         <a href="./" class="text-white px-4 py-2"><em>Beranda</em></a>
@@ -145,7 +146,8 @@
             </p>
         </div>
     </div>
-    <footer style="background: rgb(102, 51, 0)" class="text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
+    <footer style="background: rgb(102, 51, 0)"
+        class="fade-up text-white w-full py-2 mt-8 fixed bottom-0 h-30 bg-opacity-50">
         <div class="container mx-auto text-center w-full">
             <div class="social-icons flex justify-center mt-4">
                 <a href="https://github.com/Andy0703-E" target="_blank" class="text-white mx-2">
@@ -163,7 +165,11 @@
             </p>
         </div>
     </footer>
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <script>
         const sidebar = document.getElementById("sidebar");
         const sidebarToggle = document.getElementById("sidebar-toggle");
