@@ -58,7 +58,7 @@
             flex: 1;
         }
 
-         @keyframes fadeUp {
+        @keyframes fadeUp {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
@@ -75,12 +75,18 @@
             animation: fadeUp 1.5s ease forwards;
             animation-delay: .5s;
         }
+
+        @media (max-width: 676px) {
+            .mobile {
+                margin-top: 140px;
+            }
+        }
     </style>
 </head>
 
 <body
     style="background: url(./kopi.jpeg); background-position: center; background-repeat: repeat; background-size: cover; background-position: center;">
-  <!-- Sidebar -->
+    <!-- Sidebar -->
     <div id="sidebar" class="sidebar" data-aos="fade-right" data-aos-duration="600">
         <a href="#" id="close-sidebar" class="text-right px-4 py-2 text-white">✖</a>
         <a href="./" class="text-white px-4 py-2"><em>Beranda</em></a>
@@ -123,8 +129,10 @@
             </div>
         </div>
     </nav>
-    <br><br><br>
-    <div class="container mx-auto px-2 py-4" data-aos="fade-up" data-aos-duration="800">
+    <br>
+    <br>
+    <br>
+    <div class="container mx-auto mobile px-2 py-4" data-aos="fade-up" data-aos-duration="800">
         <div class="text-white rounded-lg shadow-lg p-8 w-full max-w-3xl mx-auto mb-10">
             <h2 class="text-4xl text-center font-semibold mb-3">Jam Buka</h2>
             <ul style="color: rgb(255, 136, 8);" class="text-center space-y-2 text-lg">
