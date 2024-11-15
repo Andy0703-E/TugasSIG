@@ -66,6 +66,9 @@
         }
 
         .popup-container {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: auto;
             font-size: 14px;
             color: #333;
         }
@@ -244,28 +247,62 @@
                 Sabtu: "08.00–02. 00",
                 Minggu: "08.00–00.00",
             },
+            reviews: [
+                { name: "Munawir Muhtar", stars: "★★★★★", date: "7 tahun lalu", text: "Nongkrong asyik. Karaoke setiap saat tersedia. Tempat nyaman. Ayo kekopita" },
+                { name: "Syamsul Zubir", stars: "★★★★★", date: "7 tahun lalu", text: "Sangat cocok disemua kalangan untuk menikmati hangatnya kopi." },
+                { name: "Aidil 57", stars: "★★★★★", date: "6 tahun lalu", text: "Tempatnya luas, jaringan wi-fi ada, live musik ada dan sedikit bernuansa alam" },
+                { name: "Hasiruddin Yudistira", stars: "★★★★★", date: "2 tahun lalu", text: "Minum coffee tanpa dan dengan gula pasir atau gula merah, pelanggan yg lakunin" },
+                { name: "Muh. Aspa", stars: "★★★★★", date: "5 tahun lalu", text: "Cocoknya malam hari buat nongkrong" },
+                { name: "Gery Krisna", stars: "★★★★☆", date: "6 tahun lalu", text: "Sinyal Wifi Sangat LaLoad... Bikin pengunjung jadi Kecewa" },
+                { name: "Ahmad Amiruddin", stars: "★★★★☆", date: "6 tahun lalu", text: "Mantappp" },
+                { name: "Nofri Wahyudi", stars: "★★★★★", date: "2 tahun lalu", text: "Tempatnya nyaman pelayanan cepat.. recomended.. buat mahasiswa yang mencari kenyamanan untuk ngumpul bareng teman." },
+                { name: "Reza Susanto", stars: "★★★★★", date: "4 tahun lalu", text: "Tempat asyik buat nongkrong dgn fasilitas karaoke gratis untuk pengunjung, menu makanan sangat bervariasi dengan harga bersahabat." },
+                { name: "Jeje", stars: "★★★☆☆", date: "3 tahun lalu", text: "Kebanyakan semut" },
+                { name: "Aa Hermansyah", stars: "★★★★★", date: "4 tahun lalu", text: "Harga bersahabat, tempat nyaman." },
+                { name: "Bintoro Ahmadi", stars: "★★★★★", date: "5 tahun lalu", text: "Ramah pelayanan dan harga terjangkau." },
+                { name: "Fahmi", stars: "★★★★★", date: "5 tahun lalu", text: "Pelayanannya ramah dan nyaman tempatnya." },
+                { name: "Bang Win", stars: "★★★★☆", date: "5 tahun lalu", text: "Asik nongkrong di kafe ini, tempatnya bersih, pelayanan bagus, harga murah." },
+                { name: "H. Nurfatullah", stars: "★★★★☆", date: "5 tahun lalu", text: "Tempatnya nyaman harga bersahabat." },
+                { name: "Henky Suwarto", stars: "★★★☆☆", date: "5 tahun lalu", text: "Wi-fi lemot, ada kucing peliharaannya gangguin pengunjung yang makan." },
+                { name: "Abdul Natsir", stars: "★★★★☆", date: "5 tahun lalu", text: "Good." },
+                { name: "Ida Resmawati", stars: "★★★☆☆", date: "5 tahun lalu", text: "Cukup enak." },
+                { name: "Abdussalam Afidah", stars: "★★★★☆", date: "4 tahun lalu", text: "Bagus dan murah." },
+                { name: "Yusran Halim", stars: "★★★★★", date: "4 tahun lalu", text: "Bagus tempatnya." }
+            ],
+
         };
 
         const marker = L.marker(umkmData.coords).addTo(map);
 
-        // Menambahkan tooltip permanen pada marker
         marker.bindTooltip(umkmData.name, {
             permanent: true,
             direction: "top",
             className: "marker-tooltip",
         });
 
+        // Menyusun HTML ulasan
+        const reviewHTML = umkmData.reviews.map(review => `
+<div class="review">
+    <h3>${review.name}</h3>
+    <span class="stars">${review.stars}</span>
+    <p class="review-date">${review.date}</p>
+    <p>${review.text}</p>
+</div>
+`).join("");
+
         marker.bindPopup(`
-                <div class="popup-container">
-                    <div class="popup-header">${umkmData.name}</div>
-                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
-                    <div class="popup-category">${umkmData.category}</div>
-                    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
-                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
-                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
-                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
-                </div>
-            `);
+<div class="popup-container">
+    <div class="popup-header">${umkmData.name}</div>
+    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
+    <div class="popup-category">${umkmData.category}</div>
+    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+    <h1>Ulasan Pengguna</h1>
+    ${reviewHTML}
+</div>
+`);
 
         fetch("./kecamatanBenteng.geojson")
             .then((response) => response.json())
