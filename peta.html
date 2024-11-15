@@ -97,18 +97,21 @@
 
         #map {
             width: 100%;
-            height: 430px;
+            height: 530px;
             display: flex;
-            margin-top: 100px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
             z-index: 0;
         }
 
         @media (max-width: 676px) {
-            .mobile {
+            #map {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100vh;
+                height: 1000px;
+                margin-top: 50px;
             }
         }
 
@@ -129,6 +132,13 @@
             animation: fadeUp 1.5s ease forwards;
             animation-delay: .5s;
             /* Delay opsional */
+        }
+
+        /* Pastikan kontrol berada di atas peta */
+        .leaflet-control-layers {
+            z-index: 9999 !important;
+            /* Pastikan kontrol tetap di atas */
+            display: block !important;
         }
     </style>
 </head>
@@ -238,6 +248,30 @@
     document.addEventListener("DOMContentLoaded", function () {
         const map = L.map("map").setView([-6.114443, 120.462397], 15);
 
+        // Layer untuk peta default (OpenStreetMap)
+        const osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        });
+
+        // Layer untuk peta satelit (ESRI)
+        const satelliteLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+        });
+
+        osmLayer.addTo(map);
+
+        satelliteLayer.addTo(map);
+
+        // Tombol untuk mengganti mode peta
+        const baseMaps = {
+            "Default": map,
+            "Peta Biasa": osmLayer,
+            "Peta Satelit": satelliteLayer
+        };
+
+        // Menambahkan kontrol untuk mengganti mode peta dan memastikan kontrol ditampilkan
+        L.control.layers(baseMaps).addTo(map);
+
         const umkmData = {
             name: "Kopita Coffea",
             rating: "4.2",
@@ -254,7 +288,7 @@
                 Rabu: "08.00–00.00",
                 Kamis: "08.00–00.00",
                 Jumat: "08.00–02.00",
-                Sabtu: "08.00–02. 00",
+                Sabtu: "08.00–02.00",
                 Minggu: "08.00–00.00",
             },
             reviews: [
@@ -292,27 +326,27 @@
 
         // Menyusun HTML ulasan
         const reviewHTML = umkmData.reviews.map(review => `
-<div class="review">
-    <h3>${review.name}</h3>
-    <span class="stars">${review.stars}</span>
-    <p class="review-date">${review.date}</p>
-    <p>${review.text}</p>
-</div>
-`).join("");
+    <div class="review">
+        <h3>${review.name}</h3>
+        <span class="stars">${review.stars}</span>
+        <p class="review-date">${review.date}</p>
+        <p>${review.text}</p>
+    </div>
+    `).join("");
 
         marker.bindPopup(`
-<div class="popup-container">
-    <div class="popup-header">${umkmData.name}</div>
-    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
-    <div class="popup-category">${umkmData.category}</div>
-    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
-    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
-    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
-    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
-    <h1>Ulasan Pengguna</h1>
-    ${reviewHTML}
-</div>
-`);
+    <div class="popup-container">
+        <div class="popup-header">${umkmData.name}</div>
+        <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
+        <div class="popup-category">${umkmData.category}</div>
+        <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+        <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+        <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+        <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+        <h1>Ulasan Pengguna</h1>
+        ${reviewHTML}
+    </div>
+    `);
 
         fetch("./kecamatanBenteng.geojson")
             .then((response) => response.json())
@@ -323,7 +357,7 @@
                         weight: 1.5,
                         opacity: 0.8,
                         fillColor: "rgba(52, 235, 58)",
-                        fillOpacity: .7,
+                        fillOpacity: .2,
                     },
                 }).addTo(map);
             })
@@ -345,6 +379,7 @@
                 console.error("Error loading jalan GeoJSON:", error)
             );
     });
+
 </script>
 </body>
 
