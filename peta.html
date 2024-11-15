@@ -265,7 +265,7 @@
         // Tombol untuk mengganti mode peta
         const baseMaps = {
             "Default": map,
-            "Peta Biasa": osmLayer,
+            "Peta Osm": osmLayer,
             "Peta Satelit": satelliteLayer
         };
 
@@ -290,7 +290,9 @@
                 Jumat: "08.00–02.00",
                 Sabtu: "08.00–02.00",
                 Minggu: "08.00–00.00",
+
             },
+            maps: "<a href ='https://www.google.com/maps/place/Kopita+Coffee/@-6.1152934,120.4620706,68m/data=!3m1!1e3!4m14!1m7!3m6!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!2sKopita+Coffee!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75!3m5!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75?entry=ttu&g_ep=EgoyMDI0MTExMi4wIKXMDSoASAFQAw%3D%3D'>Lihat Di Maps</a>",
             reviews: [
                 { name: "Munawir Muhtar", stars: "★★★★★", date: "7 tahun lalu", text: "Nongkrong asyik. Karaoke setiap saat tersedia. Tempat nyaman. Ayo kekopita" },
                 { name: "Syamsul Zubir", stars: "★★★★★", date: "7 tahun lalu", text: "Sangat cocok disemua kalangan untuk menikmati hangatnya kopi." },
@@ -343,6 +345,7 @@
         <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
         <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
         <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+        <div class="popup-contact"><i class="fas fa-maps-alt"></i> ${umkmData.maps}</div>
         <h1>Ulasan Pengguna</h1>
         ${reviewHTML}
     </div>
