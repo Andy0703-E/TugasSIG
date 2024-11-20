@@ -224,25 +224,29 @@
         // Inisialisasi AOS
         AOS.init();
 
-        // JavaScript untuk Sidebar
-        const sidebar = document.getElementById("sidebar");
-        const sidebarToggle = document.getElementById("sidebar-toggle");
-        const closeSidebar = document.getElementById("close-sidebar");
+    const sidebar = document.getElementById("sidebar");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const closeSidebar = document.getElementById("close-sidebar");
 
-        sidebarToggle.addEventListener("click", function () {
-            sidebar.style.left = "0px";
-        });
+    // Fungsi untuk membuka sidebar
+    sidebarToggle.addEventListener("click", function () {
+        sidebar.style.left = "0px";
+    });
 
-        closeSidebar.addEventListener("click", function () {
+    // Fungsi untuk menutup sidebar
+    closeSidebar.addEventListener("click", function () {
+        sidebar.style.left = "-250px";
+    });
+
+    // Ambil semua tautan di sidebar
+    const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+    // Tambahkan event listener untuk setiap tautan
+    sidebarLinks.forEach((link) => {
+        link.addEventListener("click", function () {
             sidebar.style.left = "-250px";
         });
-
-        const sidebarLinks = document.querySelectorAll(".sidebar a");
-        sidebarLinks.forEach((link) => {
-            link.addEventListener("click", function () {
-                sidebar.style.left = "-250px";
-            });
-        });
+    });
     </script>
 </body>
 
