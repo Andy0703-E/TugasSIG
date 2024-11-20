@@ -223,31 +223,28 @@
         // Inisialisasi AOS
         AOS.init();
 
-   document.addEventListener("DOMContentLoaded", function() {
-        const sidebar = document.getElementById("sidebar");
-        const sidebarToggle = document.getElementById("sidebar-toggle");
-        const closeSidebar = document.getElementById("close-sidebar");
+   const sidebar = document.getElementById("sidebar");
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const closeSidebar = document.getElementById("close-sidebar");
 
-        // Pastikan elemen-elemen ada
-        if (sidebar && sidebarToggle && closeSidebar) {
-            // Fungsi untuk membuka sidebar
-            sidebarToggle.addEventListener("click", function () {
-                sidebar.style.left = "0";  // Membuka sidebar
-            });
+    // Fungsi untuk membuka sidebar
+    sidebarToggle.addEventListener("click", function () {
+        sidebar.style.left = "0px";
+    });
 
-            // Fungsi untuk menutup sidebar
-            closeSidebar.addEventListener("click", function () {
-                sidebar.style.left = "-250px";  // Menutup sidebar
-            });
+    // Fungsi untuk menutup sidebar
+    closeSidebar.addEventListener("click", function () {
+        sidebar.style.left = "-250px";
+    });
 
-            // Menutup sidebar saat tautan sidebar diklik
-            const sidebarLinks = document.querySelectorAll(".sidebar a");
-            sidebarLinks.forEach((link) => {
-                link.addEventListener("click", function () {
-                    sidebar.style.left = "-250px";  // Menutup sidebar saat tautan diklik
-                });
-            });
-        }
+    // Ambil semua tautan di sidebar
+    const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+    // Tambahkan event listener untuk setiap tautan
+    sidebarLinks.forEach((link) => {
+        link.addEventListener("click", function () {
+            sidebar.style.left = "-250px";
+        });
     });
 
     </script>
