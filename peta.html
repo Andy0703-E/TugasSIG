@@ -289,7 +289,9 @@
                         onEachFeature: function (feature, layer) {
                             if (feature.properties && feature.properties.name) {
                                 // Tambahkan popup untuk setiap fitur
-                                layer.bindPopup(`Nama: ${feature.properties.name}`);
+                                layer.bindPopup(`
+                                permanent:true,
+                                Nama: ${feature.properties.name}`);
                             }
                         },
                     }).addTo(map);
@@ -366,7 +368,7 @@
         const marker = L.marker(umkmData.coords).addTo(map);
 
         marker.bindTooltip(umkmData.name, {
-            permanent: false,
+            permanent: true,
             direction: "top",
             text: "center",
             className: "marker-tooltip",
