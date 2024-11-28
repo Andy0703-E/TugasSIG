@@ -250,86 +250,47 @@
 
         // Gaya untuk layer GeoJSON
         const defaultStyle = {
-            permanent: true,
             color: "#f0f0f0",
             weight: 1.5,
             opacity: 0.8,
             fillColor: "#45F450",
             fillOpacity: 1,
         };
-        // Memuat GeoJSON
+
+        // Memuat semua GeoJSON, agar langsung tampil tanpa harus diklik
         loadGeoJSON("./sekolah.geojson", defaultStyle);
         loadGeoJSON("./mesjid.geojson", defaultStyle);
 
-        fetch("./BentengUtara.geojson")
-            .then((response) => response.json())
-            .then((geojsonData) => {
-                L.geoJSON(geojsonData, {
-                    style: {
-                        color: "#f0f0f0",
-                        weight: 1.5,
-                        opacity: 0.8,
-                        fillColor: "rgba(52, 235, 58)",
-                        fillOpacity: .2,
-                    },
-                }).addTo(map);
-            })
-            .catch((error) =>
-                console.error("Error loading kecamatanBenteng GeoJSON:", error)
-            );
-        fetch("./BentengPusat.geojson")
-            .then((response) => response.json())
-            .then((geojsonData) => {
-                L.geoJSON(geojsonData, {
-                    style: {
-                        color: "#f0f0f0",
-                        weight: 1.5,
-                        opacity: 0.8,
-                        fillColor: "#45D",
-                        fillOpacity: .2,
-                    },
-                }).addTo(map);
-            })
-            .catch((error) =>
-                console.error("Error loading kecamatanBenteng GeoJSON:", error)
-            );
-        fetch("./BentengSelatan.geojson")
-            .then((response) => response.json())
-            .then((geojsonData) => {
-                L.geoJSON(geojsonData, {
-                    style: {
-                        color: "#f0f0f0",
-                        weight: 1.5,
-                        opacity: 0.8,
-                        fillColor: "#F34",
-                        fillOpacity: .2,
-                    },
-                }).addTo(map);
-            })
-            .catch((error) =>
-                console.error("Error loading kecamatanBenteng GeoJSON:", error)
-            );
-        fetch("./jalanBentengAnjay.geojson")
-            .then((response) => response.json())
-            .then((geojsonData) => {
-                L.geoJSON(geojsonData, {
-                    style: {
-                        color: "#333",
-                        weight: 3,
-                        opacity: 1,
-                    },
-                }).addTo(map);
-            })
-            .catch((error) =>
-                console.error("Error loading jalan GeoJSON:", error)
-            );
+        const geojsonFiles = [
+            { url: "./BentengUtara.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "rgba(52, 235, 58)", fillOpacity: 0.2 } },
+            { url: "./BentengPusat.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "#45D", fillOpacity: 0.2 } },
+            { url: "./BentengSelatan.geojson", style: { color: "#f0f0f0", weight: 1.5, opacity: 0.8, fillColor: "#F34", fillOpacity: 0.2 } },
+            { url: "./jalanBentengAnjay.geojson", style: { color: "#333", weight: 3, opacity: 1 } }
+        ];
+
+        geojsonFiles.forEach((file) => {
+            fetch(file.url)
+                .then((response) => response.json())
+                .then((geojsonData) => {
+                    L.geoJSON(geojsonData, {
+                        style: file.style,
+                        onEachFeature: function (feature, layer) {
+                            if (feature.properties.nama) {
+                                // Tambahkan popup untuk setiap fitur
+                                layer.bindPopup(`${feature.properties.nama}`);
+                            }
+                        }
+                    }).addTo(map);
+                })
+                .catch((error) => console.error(`Error loading GeoJSON from ${file.url}:`, error));
+        });
 
         // Tombol untuk mengganti mode peta
         const baseMaps = {
             "Default": map
         };
 
-        // Menambahkan kontrol untuk mengganti mode peta dan memastikan kontrol ditampilkan
+        // Menambahkan kontrol untuk mengganti mode peta
         L.control.layers(baseMaps).addTo(map);
 
         const umkmData = {
@@ -350,9 +311,8 @@
                 Jumat: "08.00–02.00",
                 Sabtu: "08.00–02.00",
                 Minggu: "08.00–00.00",
-
             },
-            maps: "<a class='text-white rounded px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow font-semibold w-full' href='https://www.google.com/maps/place/Kopita+Coffee/@-6.1152934,120.4620706,68m/data=!3m1!1e3!4m14!1m7!3m6!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!2sKopita+Coffee!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75!3m5!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75?entry=ttu&g_ep=EgoyMDI0MTExMi4wIKXMDSoASAFQAw%3D%3D' style='text-decoration:none; background: white'>Lihat Di Maps</a> <br> <br>",
+            maps: "<a class='text-white rounded px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow font-semibold w-full' href='https://www.google.com/maps/place/Kopita+Coffee/@-6.1152934,120.4620706,68m/data=!3m1!1e3!4m14!1m7!3m6!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!2sKopita+Coffee!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75!3m5!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75?entry=ttu&g_ep=EgoyMDI0MTExMi4wIKXMDSoASAFQAw%3D%3D' style='text-decoration:none; background: white'>Lihat Di Maps</a><br><br>",
             reviews: [
                 { name: "Munawir Muhtar", stars: "★★★★★", date: "7 tahun lalu", text: "Nongkrong asyik. Karaoke setiap saat tersedia. Tempat nyaman. Ayo kekopita" },
                 { name: "Syamsul Zubir", stars: "★★★★★", date: "7 tahun lalu", text: "Sangat cocok disemua kalangan untuk menikmati hangatnya kopi." },
@@ -375,11 +335,9 @@
                 { name: "Abdussalam Afidah", stars: "★★★★☆", date: "4 tahun lalu", text: "Bagus dan murah." },
                 { name: "Yusran Halim", stars: "★★★★★", date: "4 tahun lalu", text: "Bagus tempatnya." }
             ],
-
         };
 
         const marker = L.marker(umkmData.coords).addTo(map);
-
         marker.bindTooltip(umkmData.name, {
             permanent: true,
             direction: "top",
@@ -389,29 +347,30 @@
 
         // Menyusun HTML ulasan
         const reviewHTML = umkmData.reviews.map(review => `
-    <div class="review">
-        <h3>${review.name}</h3>
-        <span class="stars">${review.stars}</span>
-        <p class="review-date">${review.date}</p>
-        <p>${review.text}</p>
-    </div>
-    `).join("");
+                <div class="review">
+                    <h3>${review.name}</h3>
+                    <span class="stars">${review.stars}</span>
+                    <p class="review-date">${review.date}</p>
+                    <p>${review.text}</p>
+                </div>
+            `).join("");
 
         marker.bindPopup(`
-    <div class="popup-container">
-        <div class="popup-header">${umkmData.name}</div>
-        <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
-        <div class="popup-category">${umkmData.category}</div>
-        <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
-        <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
-        <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
-        <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
-        <br>
-        <div class="popup-contact"><i class="fas fa-maps-alt"></i> ${umkmData.maps}</div>
-        <h1>Ulasan Pengguna</h1> <br>
-        ${reviewHTML}
-    </div>
-    `);
+                <div class="popup-container">
+                    <div class="popup-header">${umkmData.name}</div>
+                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
+                    <div class="popup-category">${umkmData.category}</div>
+                    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+                    <br>
+                    <div class="popup-contact"><i class="fas fa-maps-alt"></i> ${umkmData.maps}</div>
+                    <h1>Ulasan Pengguna</h1> <br>
+                    ${reviewHTML}
+                </div>
+            `);
+
         function loadGeoJSON(url, styleOptions) {
             fetch(url)
                 .then((response) => response.json())
@@ -420,7 +379,6 @@
                         style: styleOptions,
                         onEachFeature: function (feature, layer) {
                             if (feature.properties.nama) {
-                                // Tambahkan popup untuk setiap fitur
                                 layer.bindPopup(`${feature.properties.nama}`);
                             }
                         },
@@ -428,7 +386,6 @@
                 })
                 .catch((error) => console.error(`Error loading ${url} GeoJSON:`, error));
         }
-
     });
 
 </script>
