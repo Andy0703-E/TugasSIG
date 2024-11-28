@@ -246,7 +246,7 @@
         });
     });
     document.addEventListener("DOMContentLoaded", function () {
-        const map = L.map("map").setView([-6.114443, 120.462397], 15);
+        const map = L.map("map").setView([-6.114443, 120.462397], 18);
 
         // Fungsi untuk memuat file GeoJSON
         function loadGeoJSON(url, styleOptions) {
@@ -256,9 +256,8 @@
                     L.geoJSON(geojsonData, {
                         style: styleOptions,
                         onEachFeature: function (feature, layer) {
-                            if (feature.properties.nama && feature.properties.nama) {
+                            if (feature.properties.nama) {
                                 // Tambahkan popup untuk setiap fitur
-                                layer.bindPopup(`${feature.properties.nama}`);
                                 layer.bindPopup(`${feature.properties.nama}`);
                             }
                         },
@@ -266,6 +265,7 @@
                 })
                 .catch((error) => console.error(`Error loading ${url} GeoJSON:`, error));
         }
+
 
         // Gaya untuk layer GeoJSON
         const defaultStyle = {
