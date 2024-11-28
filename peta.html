@@ -246,7 +246,7 @@
         });
     });
     document.addEventListener("DOMContentLoaded", function () {
-        const map = L.map("map").setView([-6.115219, 120.462126], 16);
+        const map = L.map("map").setView([-6.115219, 120.462126], 16); // Inisialisasi peta
 
         // Gaya untuk layer GeoJSON
         const defaultStyle = {
@@ -275,9 +275,11 @@
                     L.geoJSON(geojsonData, {
                         style: file.style,
                         onEachFeature: function (feature, layer) {
-                            if (feature.properties.nama) {
-                                // Tambahkan popup untuk setiap fitur
+                            // Pastikan fitur memiliki obj properties 'nama'
+                            if (feature.properties && feature.properties.nama) {
                                 layer.bindPopup(`${feature.properties.nama}`);
+                            } else {
+                                console.warn('Fitur tidak memiliki properti "nama":', feature);
                             }
                         }
                     }).addTo(map);
@@ -287,7 +289,7 @@
 
         // Tombol untuk mengganti mode peta
         const baseMaps = {
-            "Default": map
+            "Default": map // Anda bisa menambah baseMap lain di sini
         };
 
         // Menambahkan kontrol untuk mengganti mode peta
@@ -303,40 +305,30 @@
             phone: "0858-2769-6334",
             coords: [-6.115219, 120.462126],
             imageUrl: "./kopita.jpg",
-            hours: {
-                Senin: "08.00–00.00",
-                Selasa: "08.00–00.00",
-                Rabu: "08.00–00.00",
-                Kamis: "08.00–00.00",
-                Jumat: "08.00–02.00",
-                Sabtu: "08.00–02.00",
-                Minggu: "08.00–00.00",
-            },
             maps: "<a class='text-white rounded px-4 py-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow font-semibold w-full' href='https://www.google.com/maps/place/Kopita+Coffee/@-6.1152934,120.4620706,68m/data=!3m1!1e3!4m14!1m7!3m6!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!2sKopita+Coffee!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75!3m5!1s0x2dbbcb36fbbb2997:0xd89c88b4c95ae43f!8m2!3d-6.1152954!4d120.4622291!16s%2Fg%2F11c70j7v75?entry=ttu&g_ep=EgoyMDI0MTExMi4wIKXMDSoASAFQAw%3D%3D' style='text-decoration:none; background: white'>Lihat Di Maps</a><br><br>",
-            reviews: [
-                { name: "Munawir Muhtar", stars: "★★★★★", date: "7 tahun lalu", text: "Nongkrong asyik. Karaoke setiap saat tersedia. Tempat nyaman. Ayo kekopita" },
-                { name: "Syamsul Zubir", stars: "★★★★★", date: "7 tahun lalu", text: "Sangat cocok disemua kalangan untuk menikmati hangatnya kopi." },
-                { name: "Aidil 57", stars: "★★★★★", date: "6 tahun lalu", text: "Tempatnya luas, jaringan wi-fi ada, live musik ada dan sedikit bernuansa alam" },
-                { name: "Hasiruddin Yudistira", stars: "★★★★★", date: "2 tahun lalu", text: "Minum coffee tanpa dan dengan gula pasir atau gula merah, pelanggan yg lakunin" },
-                { name: "Muh. Aspa", stars: "★★★★★", date: "5 tahun lalu", text: "Cocoknya malam hari buat nongkrong" },
-                { name: "Gery Krisna", stars: "★★★★☆", date: "6 tahun lalu", text: "Sinyal Wifi Sangat LaLoad... Bikin pengunjung jadi Kecewa" },
-                { name: "Ahmad Amiruddin", stars: "★★★★☆", date: "6 tahun lalu", text: "Mantappp" },
-                { name: "Nofri Wahyudi", stars: "★★★★★", date: "2 tahun lalu", text: "Tempatnya nyaman pelayanan cepat.. recomended.. buat mahasiswa yang mencari kenyamanan untuk ngumpul bareng teman." },
-                { name: "Reza Susanto", stars: "★★★★★", date: "4 tahun lalu", text: "Tempat asyik buat nongkrong dgn fasilitas karaoke gratis untuk pengunjung, menu makanan sangat bervariasi dengan harga bersahabat." },
-                { name: "Jeje", stars: "★★★☆☆", date: "3 tahun lalu", text: "Kebanyakan semut" },
-                { name: "Aa Hermansyah", stars: "★★★★★", date: "4 tahun lalu", text: "Harga bersahabat, tempat nyaman." },
-                { name: "Bintoro Ahmadi", stars: "★★★★★", date: "5 tahun lalu", text: "Ramah pelayanan dan harga terjangkau." },
-                { name: "Fahmi", stars: "★★★★★", date: "5 tahun lalu", text: "Pelayanannya ramah dan nyaman tempatnya." },
-                { name: "Bang Win", stars: "★★★★☆", date: "5 tahun lalu", text: "Asik nongkrong di kafe ini, tempatnya bersih, pelayanan bagus, harga murah." },
-                { name: "H. Nurfatullah", stars: "★★★★☆", date: "5 tahun lalu", text: "Tempatnya nyaman harga bersahabat." },
-                { name: "Henky Suwarto", stars: "★★★☆☆", date: "5 tahun lalu", text: "Wi-fi lemot, ada kucing peliharaannya gangguin pengunjung yang makan." },
-                { name: "Abdul Natsir", stars: "★★★★☆", date: "5 tahun lalu", text: "Good." },
-                { name: "Ida Resmawati", stars: "★★★☆☆", date: "5 tahun lalu", text: "Cukup enak." },
-                { name: "Abdussalam Afidah", stars: "★★★★☆", date: "4 tahun lalu", text: "Bagus dan murah." },
-                { name: "Yusran Halim", stars: "★★★★★", date: "4 tahun lalu", text: "Bagus tempatnya." }
-            ],
+            reviews: [{ name: "Munawir Muhtar", stars: "★★★★★", date: "7 tahun lalu", text: "Nongkrong asyik. Karaoke setiap saat tersedia. Tempat nyaman. Ayo kekopita" },
+            { name: "Syamsul Zubir", stars: "★★★★★", date: "7 tahun lalu", text: "Sangat cocok disemua kalangan untuk menikmati hangatnya kopi." },
+            { name: "Aidil 57", stars: "★★★★★", date: "6 tahun lalu", text: "Tempatnya luas, jaringan wi-fi ada, live musik ada dan sedikit bernuansa alam" },
+            { name: "Hasiruddin Yudistira", stars: "★★★★★", date: "2 tahun lalu", text: "Minum coffee tanpa dan dengan gula pasir atau gula merah, pelanggan yg lakunin" },
+            { name: "Muh. Aspa", stars: "★★★★★", date: "5 tahun lalu", text: "Cocoknya malam hari buat nongkrong" },
+            { name: "Gery Krisna", stars: "★★★★☆", date: "6 tahun lalu", text: "Sinyal Wifi Sangat LaLoad... Bikin pengunjung jadi Kecewa" },
+            { name: "Ahmad Amiruddin", stars: "★★★★☆", date: "6 tahun lalu", text: "Mantappp" },
+            { name: "Nofri Wahyudi", stars: "★★★★★", date: "2 tahun lalu", text: "Tempatnya nyaman pelayanan cepat.. recomended.. buat mahasiswa yang mencari kenyamanan untuk ngumpul bareng teman." },
+            { name: "Reza Susanto", stars: "★★★★★", date: "4 tahun lalu", text: "Tempat asyik buat nongkrong dgn fasilitas karaoke gratis untuk pengunjung, menu makanan sangat bervariasi dengan harga bersahabat." },
+            { name: "Jeje", stars: "★★★☆☆", date: "3 tahun lalu", text: "Kebanyakan semut" },
+            { name: "Aa Hermansyah", stars: "★★★★★", date: "4 tahun lalu", text: "Harga bersahabat, tempat nyaman." },
+            { name: "Bintoro Ahmadi", stars: "★★★★★", date: "5 tahun lalu", text: "Ramah pelayanan dan harga terjangkau." },
+            { name: "Fahmi", stars: "★★★★★", date: "5 tahun lalu", text: "Pelayanannya ramah dan nyaman tempatnya." },
+            { name: "Bang Win", stars: "★★★★☆", date: "5 tahun lalu", text: "Asik nongkrong di kafe ini, tempatnya bersih, pelayanan bagus, harga murah." },
+            { name: "H. Nurfatullah", stars: "★★★★☆", date: "5 tahun lalu", text: "Tempatnya nyaman harga bersahabat." },
+            { name: "Henky Suwarto", stars: "★★★☆☆", date: "5 tahun lalu", text: "Wi-fi lemot, ada kucing peliharaannya gangguin pengunjung yang makan." },
+            { name: "Abdul Natsir", stars: "★★★★☆", date: "5 tahun lalu", text: "Good." },
+            { name: "Ida Resmawati", stars: "★★★☆☆", date: "5 tahun lalu", text: "Cukup enak." },
+            { name: "Abdussalam Afidah", stars: "★★★★☆", date: "4 tahun lalu", text: "Bagus dan murah." },
+            { name: "Yusran Halim", stars: "★★★★★", date: "4 tahun lalu", text: "Bagus tempatnya." }] // Masukkan data review Anda di sini
         };
 
+        // Buat marker untuk UMKM
         const marker = L.marker(umkmData.coords).addTo(map);
         marker.bindTooltip(umkmData.name, {
             permanent: true,
@@ -345,46 +337,52 @@
             className: "marker-tooltip",
         });
 
-        // Menyusun HTML ulasan
+        // Membuat konten HTML untuk popup
         const reviewHTML = umkmData.reviews.map(review => `
-                <div class="review">
-                    <h3>${review.name}</h3>
-                    <span class="stars">${review.stars}</span>
-                    <p class="review-date">${review.date}</p>
-                    <p>${review.text}</p>
-                </div>
-            `).join("");
+        <div class="review">
+            <h3>${review.name}</h3>
+            <span class="stars">${review.stars}</span>
+            <p class="review-date">${review.date}</p>
+            <p>${review.text}</p>
+        </div>
+    `).join("");
 
         marker.bindPopup(`
-                <div class="popup-container">
-                    <div class="popup-header">${umkmData.name}</div>
-                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
-                    <div class="popup-category">${umkmData.category}</div>
-                    <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
-                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
-                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
-                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
-                    <br>
-                    <div class="popup-contact"><i class="fas fa-maps-alt"></i> ${umkmData.maps}</div>
-                    <h1>Ulasan Pengguna</h1> <br>
-                    ${reviewHTML}
-                </div>
-            `);
+        <div class="popup-container">
+            <div class="popup-header">${umkmData.name}</div>
+            <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews.length})</span></div>
+            <div class="popup-category">${umkmData.category}</div>
+            <img src="${umkmData.imageUrl}" alt="${umkmData.name}" class="popup-image" />
+            <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+            <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+            <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+            <br>
+            <div class="popup-contact"><i class="fas fa-maps-alt"></i> ${umkmData.maps}</div>
+            <h1>Ulasan Pengguna</h1><br>
+            ${reviewHTML}
+        </div>
+    `);
 
+        // Fungsi untuk memuat GeoJSON
         function loadGeoJSON(url, styleOptions) {
             fetch(url)
-                .then((response) => response.json())
-                .then((geojsonData) => {
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(geojsonData => {
                     L.geoJSON(geojsonData, {
                         style: styleOptions,
                         onEachFeature: function (feature, layer) {
-                            if (feature.properties.nama) {
+                            if (feature.properties && feature.properties.nama) {
                                 layer.bindPopup(`${feature.properties.nama}`);
                             }
                         },
                     }).addTo(map);
                 })
-                .catch((error) => console.error(`Error loading ${url} GeoJSON:`, error));
+                .catch(error => console.error(`Error loading ${url} GeoJSON:`, error));
         }
     });
 
