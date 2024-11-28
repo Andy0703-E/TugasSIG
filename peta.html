@@ -279,7 +279,7 @@
                 console.error("Error loading jalan GeoJSON:", error)
             );
 
-        fetch("./mesjid.geojson")
+        fetch("./Mesjid.geojson")
             .then((response) => response.json())
             .then((geojsonData) => {
                 L.geoJSON(geojsonData, {
