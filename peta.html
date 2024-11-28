@@ -289,9 +289,7 @@
                         onEachFeature: function (feature, layer) {
                             if (feature.properties && feature.properties.name) {
                                 // Tambahkan popup untuk setiap fitur
-                                layer.bindPopup(`
-                                permanent:true,
-                                Nama: ${feature.properties.name}`);
+                                layer.bindPopup(`Nama: ${feature.properties.name}`);
                             }
                         },
                     }).addTo(map);
